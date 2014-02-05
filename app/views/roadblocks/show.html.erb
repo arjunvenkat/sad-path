@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Error message:</strong>
+  <%= @roadblock.error_message %>
+</p>
+
+<p>
+  <strong>Code snippet:</strong>
+  <%= @roadblock.code_snippet %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @roadblock.description %>
+</p>
+
+<p>
+  <strong>User1:</strong>
+  <%= @roadblock.user1_id %>
+</p>
+
+<p>
+  <strong>User2:</strong>
+  <%= @roadblock.user2_id %>
+</p>
+
+<p>
+  <strong>Solution:</strong>
+  <%= @roadblock.solution %>
+</p>
+
+
+<%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |
+<%= link_to 'Back', roadblocks_path %>

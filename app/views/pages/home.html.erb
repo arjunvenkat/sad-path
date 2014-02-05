@@ -1,0 +1,32 @@
+
+<div class="row">
+  <%= form_for(Roadblock.new, html: {class: "col-md-6"}) do |f| %>
+    <h2>Where are you stuck?</h2>
+    <div class="form-group">
+      <%= f.label :error_message, "Error Message (if applicable)" %>
+      <%= f.text_area :error_message, placeholder: "SyntaxError in Pages#home", class: "form-control", rows: 3 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :code_snippet, "Code Snippet (if applicable)" %>
+      <%= f.text_area :code_snippet, class: "form-control", rows: 10 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, "Description (if applicable)" %>
+      <%= f.text_area :description, class: "form-control", rows: 10 %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Submit", class: "btn btn-lg btn-default" %>
+    </div>
+  <% end %>
+  <div class="col-md-6">
+    <h2>Recent Roadblocks</h2>
+    <ul class="list-group">
+      <% @recent_roadblocks.each do |roadblock| %>
+        <li class="list-group-item">
+          <%= link_to roadblock.error_message, roadblock %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

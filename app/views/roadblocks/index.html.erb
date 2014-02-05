@@ -1,0 +1,37 @@
+<h1>Listing roadblocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error message</th>
+      <th>Code snippet</th>
+      <th>Description</th>
+      <th>Solution</th>
+      <th>User1</th>
+      <th>User2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roadblocks.each do |roadblock| %>
+      <tr>
+        <td><%= roadblock.error_message %></td>
+        <td><%= roadblock.code_snippet %></td>
+        <td><%= roadblock.description %></td>
+        <td><%= roadblock.solution %></td>
+        <td><%= roadblock.user1_id %></td>
+        <td><%= roadblock.user2_id %></td>
+        <td><%= link_to 'Show', roadblock %></td>
+        <td><%= link_to 'Edit', edit_roadblock_path(roadblock) %></td>
+        <td><%= link_to 'Destroy', roadblock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Roadblock', new_roadblock_path %>
