@@ -6,7 +6,6 @@
       <th>First</th>
       <th>Last</th>
       <th>Email</th>
-      <th>Password digest</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,10 +18,11 @@
         <td><%= user.first %></td>
         <td><%= user.last %></td>
         <td><%= user.email %></td>
-        <td><%= user.password_digest %></td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user.id == session[:user_id].to_i || user.id == session[:user2_id].to_i %>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

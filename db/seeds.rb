@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.destroy_all
-u1 = User.create({first: "Arjun", last: "Venkataswamy", email: "a@a.com"})
-u2 = User.create({first: "Sandy", last: "Weisz", email: "s@s.com"})
-u3 = User.create({first: "Frank", last: "Schneider", email: "f@f.com"})
+u1 = User.create({first: "Arjun", last: "Venkataswamy", email: "a@a.com", password: "arjun", password_confirmation: "arjun"})
+u2 = User.create({first: "Sandy", last: "Weisz", email: "s@s.com", password: "sandy", password_confirmation: "sandy"})
+u3 = User.create({first: "Frank", last: "Schneider", email: "f@f.com", password: "frank", password_confirmation: "frank"})
 puts "#{User.count} users created"
 
 Roadblock.destroy_all

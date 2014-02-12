@@ -23,19 +23,32 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/users/1">Profile</a></li>
         <li><a href="/roadblocks">Roadblocks</a></li>
 
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign up</a></li>
-        <li><a href="#">Sign in</a></li>
+        <% if session[:user2_id] %>
+          <% u = User.find(session[:user_id]) %>
+          <% u2 = User.find(session[:user2_id]) %>
+          <li><%= link_to u.email, u  %></li>
+          <li><%= link_to u2.email, u2  %></li>
+          <li><%= link_to "logout", "/logout", method: :delete %></li>
+        <% elsif session[:user_id] %>
+          <% u = User.find(session[:user_id]) %>
+          <li><%= link_to u.email, u  %></li>
+          <li><a href="/login">Sign in a partner</a></li>
+          <li><%= link_to "logout", "/logout", method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign up", new_user_path  %></li>
+          <li><a href="/login">Sign in</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+<%= notice %>
 <div class="container">
   <%= yield %>
 </div>

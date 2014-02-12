@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_signed_in, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -67,8 +68,14 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def check_if_signed_in
+      unless session[:user_id] == params[:id] || session[:user2_id] == params[:id]
+        redirect_to "/login"
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first, :last, :email, :password_digest)
+      params.require(:user).permit(:first, :last, :email, :password, :password_confirmation)
     end
 end

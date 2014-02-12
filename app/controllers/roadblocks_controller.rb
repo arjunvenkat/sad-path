@@ -1,4 +1,5 @@
 class RoadblocksController < ApplicationController
+  before_action :check_if_signed_in, only: [:create, :edit, :update, :destroy]
   before_action :set_roadblock, only: [:show, :edit, :update, :destroy]
 
   # GET /roadblocks
@@ -25,7 +26,10 @@ class RoadblocksController < ApplicationController
   # POST /roadblocks.json
   def create
     @roadblock = Roadblock.new(roadblock_params)
-
+    @roadblock.user1_id = @user.id
+    if session[:user2_id]
+      @roadblock.user2_id = session[:user2_id].to_i
+    end
     respond_to do |format|
       if @roadblock.save
         format.html { redirect_to '/' }
@@ -65,6 +69,13 @@ class RoadblocksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_roadblock
       @roadblock = Roadblock.find(params[:id])
+    end
+
+    def check_if_signed_in
+      unless session[:user_id]
+        redirect_to "/login", notice: "Please sign in first"
+      end
+      @user = User.find(session[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

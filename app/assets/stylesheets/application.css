@@ -16,8 +16,11 @@ body {
   padding-top: 70px;
 }
 
-
 .container-fluid {
   padding-left: 10px;
   padding-right: 20px;
+}
+
+.roadblocks-list {
+  padding-top: 1.75em;
 }

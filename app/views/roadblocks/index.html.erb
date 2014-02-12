@@ -1,37 +1,17 @@
-<h1>Listing roadblocks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error message</th>
-      <th>Code snippet</th>
-      <th>Description</th>
-      <th>Solution</th>
-      <th>User1</th>
-      <th>User2</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @roadblocks.each do |roadblock| %>
-      <tr>
-        <td><%= roadblock.error_message %></td>
-        <td><%= roadblock.code_snippet %></td>
-        <td><%= roadblock.description %></td>
-        <td><%= roadblock.solution %></td>
-        <td><%= roadblock.user1_id %></td>
-        <td><%= roadblock.user2_id %></td>
-        <td><%= link_to 'Show', roadblock %></td>
-        <td><%= link_to 'Edit', edit_roadblock_path(roadblock) %></td>
-        <td><%= link_to 'Destroy', roadblock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Roadblock', new_roadblock_path %>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <h1>Listing Roadblocks</h1>
+    <div class="list-group roadblocks-list">
+      <% @roadblocks.each do |roadblock| %>
+        <%= link_to(roadblock, class: "list-group-item") do %>
+          <h5 class="list-group-item-heading">
+            <%= truncate(roadblock.error_message, length: 60)%>
+          </h5>
+          <p class="list-group-item-text">
+            <%= truncate(roadblock.description, length: 160)  %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

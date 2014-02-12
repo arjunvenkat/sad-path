@@ -17,19 +17,23 @@
 
 <p>
   <strong>User1:</strong>
-  <%= @roadblock.user1_id %>
+  <%= @roadblock.user1.first %> <%= @roadblock.user1.last %>
 </p>
 
-<p>
-  <strong>User2:</strong>
-  <%= @roadblock.user2_id %>
-</p>
+<% if @roadblock.user2 %>
+    <p>
+      <strong>User2:</strong>
+      <%= @roadblock.user2.first %> <%= @roadblock.user2.last %>
+    </p>
+<% end %>
 
 <p>
   <strong>Solution:</strong>
   <%= @roadblock.solution %>
 </p>
 
-
-<%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |
+<% if session[:user_id].to_i == @roadblock.user1_id || session[:user_id].to_i == @roadblock.user2_id || session[:user2_id].to_i == @roadblock.user1_id || session[:user2_id].to_i == @roadblock.user2_id  %>
+  <%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |
+  <%= link_to 'Delete', roadblock_path(@roadblock), method: :delete, data: { confirm: "Are you sure?" } %> |
+<% end %>
 <%= link_to 'Back', roadblocks_path %>
