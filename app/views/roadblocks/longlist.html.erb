@@ -5,19 +5,23 @@
       <% @roadblocks.each do |roadblock| %>
         <%= link_to(roadblock, class: "list-group-item") do %>
           <p>Submitted by: <%= roadblock.user1.first %></p>
-          <h5 class="list-group-item-heading">
-            <pre>
-              <%= roadblock.error_message%>
-            </pre>
-          </h5>
+          <% if roadblock.error_message.present? %>
+            <h5 class="list-group-item-heading">
+              <pre>
+                <%= roadblock.error_message%>
+              </pre>
+            </h5>
+          <% end %>
           <p class="list-group-item-text">
             <%= roadblock.description  %>
           </p>
-          <p class="list-group-item-text">
-            <pre>
-              <%= roadblock.code_snippet  %>
-            </pre>
-          </p>
+          <% if roadblock.code_snippet.present? %>
+            <p class="list-group-item-text">
+              <pre>
+                <%= roadblock.code_snippet  %>
+              </pre>
+            </p>
+          <% end %>
         <% end %>
       <% end %>
     </div>
