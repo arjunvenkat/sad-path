@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140205051822) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "roadblocks", force: true do |t|
     t.string   "error_message"
     t.text     "code_snippet"
