@@ -1,0 +1,25 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <h1>Listing Roadblocks</h1>
+    <div class="list-group roadblocks-list">
+      <% @roadblocks.each do |roadblock| %>
+        <%= link_to(roadblock, class: "list-group-item") do %>
+          <p>Submitted by: <%= roadblock.user1.first %></p>
+          <h5 class="list-group-item-heading">
+            <pre>
+              <%= roadblock.error_message%>
+            </pre>
+          </h5>
+          <p class="list-group-item-text">
+            <%= roadblock.description  %>
+          </p>
+          <p class="list-group-item-text">
+            <pre>
+              <%= roadblock.code_snippet  %>
+            </pre>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

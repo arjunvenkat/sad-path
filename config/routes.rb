@@ -4,6 +4,7 @@ SadpathVer2::Application.routes.draw do
   delete "logout" => "sessions#destroy"
   root 'pages#home'
   resources :roadblocks
+  get "/longlist" => "roadblocks#longlist"
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -2,6 +2,10 @@ class RoadblocksController < ApplicationController
   before_action :check_if_signed_in, only: [:create, :edit, :update, :destroy]
   before_action :set_roadblock, only: [:show, :edit, :update, :destroy]
 
+  def longlist
+    @roadblocks = Roadblock.all
+  end
+
   # GET /roadblocks
   # GET /roadblocks.json
   def index
