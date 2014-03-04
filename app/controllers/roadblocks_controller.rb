@@ -3,13 +3,13 @@ class RoadblocksController < ApplicationController
   before_action :set_roadblock, only: [:show, :edit, :update, :destroy]
 
   def longlist
-    @roadblocks = Roadblock.all
+    @roadblocks = Roadblock.order(created_at: :desc)
   end
 
   # GET /roadblocks
   # GET /roadblocks.json
   def index
-    @roadblocks = Roadblock.all
+    @roadblocks = Roadblock.order(created_at: :desc)
   end
 
   # GET /roadblocks/1
