@@ -3,11 +3,11 @@
     <h2>Where are you stuck?</h2>
     <div class="form-group">
       <%= f.label :error_message, "Error Message (if applicable)" %>
-      <%= f.text_area :error_message, placeholder: "SyntaxError in Pages#home", class: "form-control", rows: 3 %>
+      <%= f.text_area :error_message, placeholder: "ex) SyntaxError in Pages#home", class: "form-control", rows: 3 %>
     </div>
     <div class="form-group">
       <%= f.label :description, "Description (if applicable)" %>
-      <%= f.text_area :description, class: "form-control", rows: 10 %>
+      <%= f.text_area :description, placeholder: "I was trying to loop through all users",class: "form-control", rows: 10 %>
     </div>
     <div class="form-group">
       <%= f.label :code_snippet, "Code Snippet (if applicable)" %>

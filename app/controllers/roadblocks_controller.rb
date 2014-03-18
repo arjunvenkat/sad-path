@@ -1,5 +1,5 @@
 class RoadblocksController < ApplicationController
-  before_action :check_if_signed_in, only: [:create, :edit, :update, :destroy]
+  before_action :check_if_signed_in
   before_action :set_roadblock, only: [:show, :edit, :update, :destroy]
 
   def longlist
@@ -9,7 +9,7 @@ class RoadblocksController < ApplicationController
   # GET /roadblocks
   # GET /roadblocks.json
   def index
-    @roadblocks = Roadblock.order(created_at: :desc)
+    @roadblocks = @user.course.roadblocks.order(created_at: :desc)
   end
 
   # GET /roadblocks/1
@@ -31,6 +31,7 @@ class RoadblocksController < ApplicationController
   def create
     @roadblock = Roadblock.new(roadblock_params)
     @roadblock.user1_id = @user.id
+    @roadblock.course_id = @user.course_id
     if session[:user2_id]
       @roadblock.user2_id = session[:user2_id].to_i
     end

@@ -1,4 +1,5 @@
 class Roadblock < ActiveRecord::Base
+  belongs_to :course
   def user1
     if self.user1_id
       User.find(self.user1_id)

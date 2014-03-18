@@ -1,4 +1,6 @@
 SadpathVer2::Application.routes.draw do
+  resources :courses
+
   get "/login" => "sessions#new"
   post "sessions/create" => "sessions#create"
   delete "logout" => "sessions#destroy"
