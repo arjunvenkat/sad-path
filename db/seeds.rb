@@ -17,4 +17,4 @@ r1 = Roadblock.create(error_message: "Undefined variable or method", user1_id: u
 r2 = Roadblock.create(error_message: "Syntax error", user1_id: u1.id, user2_id: u2.id)
 r3 = Roadblock.create(error_message: "Infinite loop", user1_id: u2.id, user2_id: u3.id)
 r4 = Roadblock.create(error_message: "Stupid mistake", user1_id: u3.id, user2_id: u1.id)
-puts "#{Roadblock.count} users created"
+puts "#{Roadblock.count} roadblocks created"
