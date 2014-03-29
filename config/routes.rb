@@ -1,4 +1,8 @@
 SadpathVer2::Application.routes.draw do
+  resources :roadblock_checks
+
+  resources :checks
+
   resources :enrollments
 
   resources :courses

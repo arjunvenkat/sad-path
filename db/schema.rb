@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328055014) do
+ActiveRecord::Schema.define(version: 20140329223532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "checks", force: true do |t|
+    t.string   "description"
+    t.string   "input_label"
+    t.text     "input_example"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -26,6 +34,15 @@ ActiveRecord::Schema.define(version: 20140328055014) do
     t.integer  "user_id"
     t.integer  "course_id"
     t.boolean  "instructor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roadblock_checks", force: true do |t|
+    t.integer  "check_id"
+    t.integer  "roadblock_id"
+    t.datetime "completed_at", default: '1970-01-01 00:00:00'
+    t.boolean  "solved_it"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,7 +66,6 @@ ActiveRecord::Schema.define(version: 20140328055014) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "course_id"
   end
 
 end

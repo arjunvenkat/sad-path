@@ -6,15 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.destroy_all
-u1 = User.create({first: "Arjun", last: "Venkataswamy", email: "a@a.com", password: "arjun", password_confirmation: "arjun"})
-u2 = User.create({first: "Sandy", last: "Weisz", email: "s@s.com", password: "sandy", password_confirmation: "sandy"})
-u3 = User.create({first: "Frank", last: "Schneider", email: "f@f.com", password: "frank", password_confirmation: "frank"})
-puts "#{User.count} users created"
+# User.destroy_all
+# u1 = User.create({first: "Arjun", last: "Venkataswamy", email: "a@a.com", password: "arjun", password_confirmation: "arjun"})
+# u2 = User.create({first: "Sandy", last: "Weisz", email: "s@s.com", password: "sandy", password_confirmation: "sandy"})
+# u3 = User.create({first: "Frank", last: "Schneider", email: "f@f.com", password: "frank", password_confirmation: "frank"})
+# puts "#{User.count} users created"
 
-Roadblock.destroy_all
-r1 = Roadblock.create(error_message: "Undefined variable or method", user1_id: u1.id)
-r2 = Roadblock.create(error_message: "Syntax error", user1_id: u1.id, user2_id: u2.id)
-r3 = Roadblock.create(error_message: "Infinite loop", user1_id: u2.id, user2_id: u3.id)
-r4 = Roadblock.create(error_message: "Stupid mistake", user1_id: u3.id, user2_id: u1.id)
-puts "#{Roadblock.count} roadblocks created"
+# Roadblock.destroy_all
+# r1 = Roadblock.create(error_message: "Undefined variable or method", user1_id: u1.id)
+# r2 = Roadblock.create(error_message: "Syntax error", user1_id: u1.id, user2_id: u2.id)
+# r3 = Roadblock.create(error_message: "Infinite loop", user1_id: u2.id, user2_id: u3.id)
+# r4 = Roadblock.create(error_message: "Stupid mistake", user1_id: u3.id, user2_id: u1.id)
+# puts "#{Roadblock.count} roadblocks created"
+
+
+Check.destroy_all
+c1 = Check.create(description: "Re-read your error message", input_label: "Paste in your error message below", input_example: "SyntaxError in Pages#home")
+

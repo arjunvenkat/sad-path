@@ -9,7 +9,8 @@ class RoadblocksController < ApplicationController
   # GET /roadblocks
   # GET /roadblocks.json
   def index
-    @roadblocks = @user.course.roadblocks.order(created_at: :desc)
+    current_course = Course.find(session[:course_id])
+    @roadblocks = current_course.roadblocks.order(created_at: :desc)
   end
 
   # GET /roadblocks/1

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @check.description %>
+</p>
+
+<p>
+  <strong>Input label:</strong>
+  <%= @check.input_label %>
+</p>
+
+<p>
+  <strong>Input example:</strong>
+  <%= @check.input_example %>
+</p>
+
+<%= link_to 'Edit', edit_check_path(@check) %> |
+<%= link_to 'Back', checks_path %>
