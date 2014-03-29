@@ -1,4 +1,6 @@
 SadpathVer2::Application.routes.draw do
+  resources :enrollments
+
   resources :courses
 
   get "/login" => "sessions#new"

@@ -28,17 +28,27 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <% if session[:user2_id] %>
+        <% if session[:user_id] %>
           <% u = User.find(session[:user_id]) %>
-          <% u2 = User.find(session[:user2_id]) %>
-          <li><%= link_to u.email, u  %></li>
-          <li><%= link_to u2.email, u2  %></li>
-          <li><%= link_to "logout", "/logout", method: :delete %></li>
-        <% elsif session[:user_id] %>
-          <% u = User.find(session[:user_id]) %>
-          <li><%= link_to u.email, u  %></li>
-          <li><a href="/login">Sign in a partner</a></li>
-          <li><%= link_to "logout", "/logout", method: :delete %></li>
+          <% c = Course.find(session[:course_id]) %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= c.name %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% u.enrollments.each do |enrollment| %>
+                <li><%= link_to enrollment.course.name, enrollment %></li>
+              <% end %>
+            </ul>
+          </li>
+          <% if session[:user2_id] %>
+            <% u2 = User.find(session[:user2_id]) %>
+            <li><%= link_to u.email, u  %></li>
+            <li><%= link_to u2.email, u2  %></li>
+            <li><%= link_to "logout", "/logout", method: :delete %></li>
+          <% else %>
+            <li><%= link_to u.email, u  %></li>
+            <li><a href="/login">Sign in a partner</a></li>
+            <li><%= link_to "logout", "/logout", method: :delete %></li>
+          <% end %>
         <% else %>
           <li><%= link_to "Sign up", new_user_path  %></li>
           <li><a href="/login">Sign in</a></li>

@@ -26,10 +26,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
+        enrollment = @user.enrollments.create(course_id: params[:course][:id], instructor: false)
         session[:user_id] = @user.id
+        logger.debug "user_id: #{session[:user_id]}"
+        session[:course_id] = enrollment.course.id
+        logger.debug "course_id: #{session[:course_id]}"
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else

@@ -24,8 +24,8 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :course_id, "course" %><br>
-    <%= f.collection_select :course_id, Course.all, :id, :name %>
+    <%= label_tag :course_id, "course" %><br>
+    <%= collection_select :course, :id, Course.all, :id, :name, prompt: true %>
   </div>
   <div class="field">
     <%= f.label :password %><br>
