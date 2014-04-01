@@ -1,0 +1,41 @@
+<%= form_for(@check_list) do |f| %>
+  <% if @check_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@check_list.errors.count, "error") %> prohibited this check_list from being saved:</h2>
+
+      <ul>
+      <% @check_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <h3>Check List Items</h3>
+
+  <% if @check_list.id %>
+    <% @check_list.check_list_items.each do |cli| %>
+      <div>
+        <%= label_tag "cli[#{cli.id}]", cli.check.description %>
+        <%= text_field_tag "cli[#{cli.id}]", cli.position  %>
+      </div>
+    <% end %>
+  <% end %>
+
+
+
+
+  <div class="field">
+    <%= label_tag :new_check_list_item, "Add a new check list item" %>
+    <%= collection_select :new_check_list_item, :id, Check.all, :id, :description, prompt: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

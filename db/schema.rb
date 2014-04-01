@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329223532) do
+ActiveRecord::Schema.define(version: 20140330152956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "check_list_items", force: true do |t|
+    t.integer  "check_list_id"
+    t.integer  "check_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "check_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "checks", force: true do |t|
     t.string   "description"
@@ -24,16 +38,24 @@ ActiveRecord::Schema.define(version: 20140329223532) do
     t.datetime "updated_at"
   end
 
+  create_table "course_check_lists", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "check_list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "check_order"
   end
 
   create_table "enrollments", force: true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.boolean  "instructor"
+    t.boolean  "instructor", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,9 +64,10 @@ ActiveRecord::Schema.define(version: 20140329223532) do
     t.integer  "check_id"
     t.integer  "roadblock_id"
     t.datetime "completed_at", default: '1970-01-01 00:00:00'
-    t.boolean  "solved_it"
+    t.boolean  "solved_it",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "user_input"
   end
 
   create_table "roadblocks", force: true do |t|

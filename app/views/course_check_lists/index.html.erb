@@ -1,0 +1,29 @@
+<h1>Listing course_check_lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Check list</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_check_lists.each do |course_check_list| %>
+      <tr>
+        <td><%= course_check_list.course_id %></td>
+        <td><%= course_check_list.check_list_id %></td>
+        <td><%= link_to 'Show', course_check_list %></td>
+        <td><%= link_to 'Edit', edit_course_check_list_path(course_check_list) %></td>
+        <td><%= link_to 'Destroy', course_check_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course check list', new_course_check_list_path %>

@@ -42,10 +42,10 @@ class RoadblockChecksController < ApplicationController
   def update
     respond_to do |format|
       if @roadblock_check.update(roadblock_check_params)
-        format.html { redirect_to @roadblock_check, notice: 'Roadblock check was successfully updated.' }
+        format.html { redirect_to "/stuck"}
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to "/stuck" }
         format.json { render json: @roadblock_check.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +69,6 @@ class RoadblockChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roadblock_check_params
-      params.require(:roadblock_check).permit(:check_id, :roadblock_id, :completed_at, :solved_it)
+      params.require(:roadblock_check).permit(:check_id, :roadblock_id, :completed_at, :solved_it, :user_input)
     end
 end

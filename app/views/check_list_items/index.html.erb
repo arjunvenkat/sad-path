@@ -1,0 +1,31 @@
+<h1>Listing check_list_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Check list</th>
+      <th>Check</th>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @check_list_items.each do |check_list_item| %>
+      <tr>
+        <td><%= check_list_item.check_list_id %></td>
+        <td><%= check_list_item.check_id %></td>
+        <td><%= check_list_item.position %></td>
+        <td><%= link_to 'Show', check_list_item %></td>
+        <td><%= link_to 'Edit', edit_check_list_item_path(check_list_item) %></td>
+        <td><%= link_to 'Destroy', check_list_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Check list item', new_check_list_item_path %>

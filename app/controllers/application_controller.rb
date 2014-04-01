@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_user_2
   helper_method :current_course
+  helper_method :current_roadblock
 
   def current_course
     @current_course = @current_course || Course.find_by_id(session[:course_id])
@@ -18,4 +19,10 @@ class ApplicationController < ActionController::Base
   def current_user_2
     @current_user_2 = @current_user_2 || User.find_by_id(session[:user2_id])
   end
+
+  def current_roadblock
+    @current_roadblock = @current_roadblock || Roadblock.find_by_id(session[:roadblock_id])
+  end
+
+
 end

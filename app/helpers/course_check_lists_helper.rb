@@ -1,0 +1,2 @@
+module CourseCheckListsHelper
+end

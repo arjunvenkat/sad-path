@@ -5,5 +5,18 @@
   <%= @course.name %>
 </p>
 
+
+<%= form_tag "/courses/#{@course.id}/check_order" do %>
+  <% Check.all.each do |check| %>
+    <div>
+      <%#=  todo %>
+    <%= label_tag check.description.to_sym %>
+    <%=  %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% @current_roadblock.roadblock_checks.each do |rc| %>
+      <div>
+        <h3><%= rc.check.description %></h3>
+        <%= form_for(rc) do |f| %>
+          <% if rc.check.input_label.present? %>
+            <div class="form-group">
+              <%= f.label :user_input, rc.check.input_label.to_sym %>
+              <%= f.text_area :user_input, placeholder: rc.check.input_example, class: "form-control" %>
+            </div>
+          <% end %>
+            <div class="form-group">
+              <%= f.submit "submit", class: "btn btn-large btn-success" %>
+            </div>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+</div>
+

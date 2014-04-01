@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        enrollment = @user.enrollments.create(course_id: params[:course][:id], instructor: false)
+        enrollment = @user.enrollments.create(course_id: params[:course][:id])
         session[:user_id] = @user.id
         logger.debug "user_id: #{session[:user_id]}"
         session[:course_id] = enrollment.course.id

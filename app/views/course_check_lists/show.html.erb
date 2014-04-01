@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @course_check_list.course_id %>
+</p>
+
+<p>
+  <strong>Check list:</strong>
+  <%= @course_check_list.check_list_id %>
+</p>
+
+<%= link_to 'Edit', edit_course_check_list_path(@course_check_list) %> |
+<%= link_to 'Back', course_check_lists_path %>

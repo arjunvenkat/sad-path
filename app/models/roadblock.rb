@@ -1,6 +1,6 @@
 class Roadblock < ActiveRecord::Base
   belongs_to :course
-  has_many :roadblock_checks
+  has_many :roadblock_checks, dependent: :destroy
   has_many :checks, through: :roadblock_checks
 
   def user1
