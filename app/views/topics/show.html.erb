@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @topic.name %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @topic.course_id %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @topic.position %>
+</p>
+
+
+<h3>Associated Roadblocks</h3>
+<ul>
+  <% @topic.roadblocks.each do |roadblock| %>
+    <% headline = "No description available" %>
+    <% roadblock.roadblock_checks.each do |rbc| %>
+      <% if rbc.user_input.present? %>
+        <% headline = rbc.user_input %>
+        <% break %>
+      <% end %>
+    <% end %>
+    <li><%= link_to headline, roadblock %></li>
+  <% end %>
+</ul>
+
+
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>

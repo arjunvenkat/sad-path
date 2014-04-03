@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330152956) do
+ActiveRecord::Schema.define(version: 20140403191753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140330152956) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "check_order"
+    t.integer  "current_topic_id"
   end
 
   create_table "enrollments", force: true do |t|
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140330152956) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "user_input"
+    t.integer  "position"
   end
 
   create_table "roadblocks", force: true do |t|
@@ -80,6 +82,17 @@ ActiveRecord::Schema.define(version: 20140330152956) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+    t.integer  "topic_id"
+    t.boolean  "solved",        default: false
+    t.boolean  "need_help",     default: false
+  end
+
+  create_table "topics", force: true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

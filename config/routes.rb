@@ -1,15 +1,19 @@
 SadpathVer2::Application.routes.draw do
+  resources :topics do
+    get "/set_current" => "topics#set_current"
+  end
   resources :check_list_items
-
   resources :course_check_lists
-
   resources :check_lists
-
   resources :roadblock_checks
   resources :checks
   resources :enrollments
   resources :courses
   resources :roadblocks
+  get '/roadblocks/:id/need-help' => 'roadblocks#need_help'
+  get '/roadblocks/:id/solved-it' => 'roadblocks#solved_it'
+  get '/roadblocks/:id/not-solved' => 'roadblocks#not_solved'
+  post 'roadblocks/:id/add-sol' => 'roadblocks#add_sol'
   resources :users
 
   get "/login" => "sessions#new"
@@ -17,6 +21,7 @@ SadpathVer2::Application.routes.draw do
   delete "logout" => "sessions#destroy"
   root 'pages#home'
   get 'stuck' => 'pages#stuck'
+  get '/move-on' => 'pages#move_on'
   get "/longlist" => "roadblocks#longlist"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

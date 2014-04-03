@@ -1,23 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Error message:</strong>
-  <pre>
-  <%= @roadblock.error_message %>
-  </pre>
-</p>
+<% @roadblock.roadblock_checks.where('user_input IS NOT NULL AND user_input != ?', "").each do |rbc| %>
+  <p>
+    <strong><%= rbc.check.input_label %></strong>
+    <pre><%= rbc.user_input %></pre>
+  </p>
+<% end %>
 
-<p>
-  <strong>Code snippet:</strong>
-  <pre>
-    <%= @roadblock.code_snippet %>
-  </pre>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @roadblock.description %>
-</p>
+<h3>Solution</h3>
+<% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
+  <p><%= rbc.check.description %></p>
+<% end %>
 
 <p>
   <strong>User1:</strong>
@@ -31,10 +24,6 @@
     </p>
 <% end %>
 
-<p>
-  <strong>Solution:</strong>
-  <%= @roadblock.solution %>
-</p>
 
 <% if session[:user_id].to_i == @roadblock.user1_id || session[:user_id].to_i == @roadblock.user2_id || session[:user2_id].to_i == @roadblock.user1_id || session[:user2_id].to_i == @roadblock.user2_id  %>
   <%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |

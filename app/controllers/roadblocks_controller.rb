@@ -1,6 +1,32 @@
 class RoadblocksController < ApplicationController
   before_action :check_if_signed_in
-  before_action :set_roadblock, only: [:show, :edit, :update, :destroy]
+  before_action :set_roadblock, only: [:show, :edit, :update, :destroy, :need_help, :solved_it, :add_sol, :not_solved]
+
+  def need_help
+    @roadblock.need_help = true
+    @roadblock.save
+    session[:roadblock_id] = nil
+    redirect_to :back
+  end
+
+  def solved_it
+    @roadblock.solved = true
+    @roadblock.save
+    redirect_to :back
+  end
+
+  def not_solved
+    @roadblock.solved = false
+    @roadblock.save
+    redirect_to :back
+  end
+
+  def add_sol
+    c = Check.create(description: params[:solution])
+    RoadblockCheck.create(check_id: c.id, roadblock_id: @roadblock.id, completed_at: DateTime.now, solved_it: true)
+    session[:roadblock_id] = nil
+    redirect_to "/stuck"
+  end
 
   def longlist
     @roadblocks = Roadblock.order(created_at: :desc)

@@ -28,7 +28,7 @@ class CourseCheckListsController < ApplicationController
 
     respond_to do |format|
       if @course_check_list.save
-        format.html { redirect_to @course_check_list, notice: 'Course check list was successfully created.' }
+        format.html { redirect_to :back, notice: 'Course check list was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course_check_list }
       else
         format.html { render action: 'new' }
@@ -56,7 +56,7 @@ class CourseCheckListsController < ApplicationController
   def destroy
     @course_check_list.destroy
     respond_to do |format|
-      format.html { redirect_to course_check_lists_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

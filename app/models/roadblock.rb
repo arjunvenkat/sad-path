@@ -1,6 +1,7 @@
 class Roadblock < ActiveRecord::Base
   belongs_to :course
-  has_many :roadblock_checks, dependent: :destroy
+  belongs_to :topic
+  has_many :roadblock_checks, -> { order("position ASC") }, dependent: :destroy
   has_many :checks, through: :roadblock_checks
 
   def user1
@@ -14,4 +15,5 @@ class Roadblock < ActiveRecord::Base
       User.find(self.user2_id)
     end
   end
+
 end

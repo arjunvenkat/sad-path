@@ -1,22 +1,62 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <% @current_roadblock.roadblock_checks.each do |rc| %>
+    <a href="/move-on">Forget it, move on to a different roadblock</a>
+    <% if @current_roadblock.solved %>
+      <h2>One last thing</h2>
+      <p><%= link_to "Nevermind, it's not fixed", "/roadblocks/#{@current_roadblock.id}/not-solved"  %></p>
+      <p>How about writing a hint to help yourself avoid this error in the future? You'll be helping any classmates that run into this issue, too. Keep it short - less than 140 characters</p>
+      <%= form_tag("/roadblocks/#{@current_roadblock.id}/add-sol") do %>
+        <div class="form-group">
+          <%= label_tag :solution, "What would you check to make sure this doesn't happen again?" %>
+          <%= text_field_tag :solution, nil, placeholder: "ex) Try restarting the Rails server", class: "form-control" %>
+        </div>
+        <%#= hidden_field_tag :roadblock_id, @current_roadblock.id %>
+        <%= submit_tag nil, class: "btn btn-large btn-success" %>
+      <% end %>
+    <% else %>
       <div>
-        <h3><%= rc.check.description %></h3>
-        <%= form_for(rc) do |f| %>
-          <% if rc.check.input_label.present? %>
-            <div class="form-group">
-              <%= f.label :user_input, rc.check.input_label.to_sym %>
-              <%= f.text_area :user_input, placeholder: rc.check.input_example, class: "form-control" %>
-            </div>
-          <% end %>
-            <div class="form-group">
-              <%= f.submit "submit", class: "btn btn-large btn-success" %>
-            </div>
-        <% end %>
-
+        <%= link_to "Fixed it!", "/roadblocks/#{@current_roadblock.id}/solved-it", class: "btn btn-large btn-success"  %>
       </div>
     <% end %>
+
+    <% if @next_rbcheck %>
+      <h2>Check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h2>
+    <% else %>
+      <h2>Completed all checks</h2>
+    <% end %>
+
+    <% @completed_rbchecks.each do |rc| %>
+      <div>
+        <h4><%= rc.check.description %></h4>
+        <% if rc.user_input %>
+          <p><%= rc.user_input %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div>
+      <% if @next_rbcheck %>
+        <h3><%= @next_rbcheck.check.description %></h3>
+        <%= form_for(@next_rbcheck) do |f| %>
+          <% if @next_rbcheck.check.input_label.present? %>
+            <div class="form-group">
+              <%= f.label :user_input, @next_rbcheck.check.input_label.to_sym %>
+              <%= f.text_area :user_input, placeholder: @next_rbcheck.check.input_example, class: "form-control" %>
+            </div>
+          <% end %>
+            <%= f.hidden_field :completed_at, value: DateTime.now %>
+            <div class="form-group">
+            <% if @next_rbcheck.completed_at > DateTime.new(1970,1,1) %>
+              <%= f.submit "update", class: "btn btn-large btn-default" %>
+            <% else %>
+              <%= f.submit "completed", class: "btn btn-large btn-default" %>
+            <% end %>
+            </div>
+        <% end %>
+      <% else %>
+        <%= link_to "Ask for help", "/roadblocks/#{@current_roadblock.id}/need-help", class: "btn btn-large btn-danger"  %>
+      <% end %>
+    </div>
   </div>
 </div>
 

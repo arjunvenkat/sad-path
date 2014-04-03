@@ -6,15 +6,47 @@
 </p>
 
 
-<%= form_tag "/courses/#{@course.id}/check_order" do %>
-  <% Check.all.each do |check| %>
-    <div>
-      <%#=  todo %>
-    <%= label_tag check.description.to_sym %>
-    <%=  %>
-    </div>
-  <% end %>
+<h3>Topics</h3>
+<p>Click a topic to set it as the current topic</p>
+<% @course.topics.each do |topic| %>
+  <div>
+    <% if topic.current? %>
+      <strong><%= link_to topic.name, "/topics/#{topic.id}/set_current" %> (current) </strong>
+    <% else %>
+      <%= link_to topic.name, "/topics/#{topic.id}/set_current" %>
+    <% end %>
+    - <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
 <% end %>
+
+
+<h3>Add a new topic</h3>
+<%= form_for(Topic.new) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.hidden_field :course_id, value: @course.id %>
+  <%= f.submit %>
+<% end %>
+
+
+<h3>Select a checklist</h3>
+<% @course.course_check_lists.each do |ccl| %>
+  <div>
+    <%= ccl.check_list.name %> - <%= link_to 'Destroy', ccl, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<h3>Add a checklist</h3>
+
+<%= form_for(CourseCheckList.new) do |f| %>
+  <%= f.collection_select :check_list_id, CheckList.all, :id, :name %>
+  <%= f.hidden_field :course_id, value: @course.id %>
+  <%= f.submit %>
+<% end %>
+
+
 
 
 
