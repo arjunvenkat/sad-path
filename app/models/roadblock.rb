@@ -9,11 +9,11 @@ class Roadblock < ActiveRecord::Base
   end
 
   def enrollment
-    Enrollment.find(enrollment_id)
+    Enrollment.find_by_id(enrollment_id)
   end
 
   def second_enrollment
-    Enrollment.find(second_enrollment_id)
+    Enrollment.find_by_id(second_enrollment_id)
   end
 
   def user1
@@ -24,7 +24,7 @@ class Roadblock < ActiveRecord::Base
   end
 
   def user2
-    second_enrollment.user
+    second_enrollment.try(:user)
     # if self.user2_id
     #   User.find(self.user2_id)
     # end
