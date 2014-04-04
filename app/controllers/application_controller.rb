@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     @current_enrollment = @current_enrollment || Enrollment.where(course_id: current_course.id, user_id: current_user.id).first
   end
 
+  def current_second_enrollment
+    @current_second_enrollment = @current_second_enrollment || Enrollment.where(course_id: current_course.id, user_id: current_user_2.id).first
+  end
+
   before_action :check_if_logged_in
 
   def check_if_logged_in

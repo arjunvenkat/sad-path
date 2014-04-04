@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404152506) do
+ActiveRecord::Schema.define(version: 20140404205919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,8 +85,10 @@ ActiveRecord::Schema.define(version: 20140404152506) do
     t.datetime "updated_at"
     t.integer  "course_id"
     t.integer  "topic_id"
-    t.boolean  "solved",        default: false
-    t.boolean  "need_help",     default: false
+    t.boolean  "solved",               default: false
+    t.boolean  "need_help",            default: false
+    t.integer  "enrollment_id"
+    t.integer  "second_enrollment_id"
   end
 
   create_table "topics", force: true do |t|
