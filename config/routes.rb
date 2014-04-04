@@ -23,6 +23,7 @@ SadpathVer2::Application.routes.draw do
   get 'stuck' => 'pages#stuck'
   get '/move-on' => 'pages#move_on'
   get '/enroll/:enrollment_hash' => 'pages#enroll'
+  get '/error' => 'pages#error'
   get "/longlist" => "roadblocks#longlist"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

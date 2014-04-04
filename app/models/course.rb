@@ -30,4 +30,8 @@ class Course < ActiveRecord::Base
     self.check_lists.first
   end
 
+  def instructors
+    self.enrollments.map {|e| e.user if e.instructor}.compact
+  end
+
 end

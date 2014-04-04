@@ -1,0 +1,9 @@
+<div class="col-md-4 col-md-offset-4">
+  <h2>We've run into a problem</h2>
+  <p>But don't worry, we can fix it<p>
+  <ul>
+    <% @errors.each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+  </ul>
+</div>

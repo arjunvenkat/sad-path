@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_2
   helper_method :current_course
   helper_method :current_roadblock
-
+  helper_method :current_enrollment
   def current_course
     @current_course = @current_course || Course.find_by_id(session[:course_id])
   end
@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
 
   def current_roadblock
     @current_roadblock = @current_roadblock || Roadblock.find_by_id(session[:roadblock_id])
+  end
+
+  def current_enrollment
+    @current_enrollment = @current_enrollment || Enrollment.where(course_id: current_course.id, user_id: current_user.id).first
   end
 
   before_action :check_if_logged_in
