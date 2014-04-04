@@ -20,13 +20,13 @@
 # puts "#{Roadblock.count} roadblocks created"
 
 
-Check.destroy_all
-c1 = Check.create(description: "Re-read your error message", input_label: "Paste in your error message below", input_example: "SyntaxError in Pages#home")
-c2 = Check.create(description: "Ask a neighbor")
-c3 = Check.create(description: "Google it")
+# Check.destroy_all
+# c1 = Check.create(description: "Re-read your error message", input_label: "Paste in your error message below", input_example: "SyntaxError in Pages#home")
+# c2 = Check.create(description: "Ask a neighbor")
+# c3 = Check.create(description: "Google it")
 
-CheckList.destroy_all
-cl1 = CheckList.create(name: "first list")
+# CheckList.destroy_all
+# cl1 = CheckList.create(name: "first list")
 
 # CheckListItem.destroy_all
 # cli1 = CheckListItem.create(check_id: c1.id, check_list_id: cl1.id)
