@@ -23,6 +23,7 @@
       <div>
         <%= label_tag "cli[#{cli.id}]", cli.check.description %>
         <%= text_field_tag "cli[#{cli.id}]", cli.position  %>
+        - <%= link_to "Destroy", cli, method: :delete %>
       </div>
     <% end %>
   <% end %>

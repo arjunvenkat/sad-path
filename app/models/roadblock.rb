@@ -4,6 +4,8 @@ class Roadblock < ActiveRecord::Base
   has_many :roadblock_checks, -> { order("position ASC") }, dependent: :destroy
   has_many :checks, through: :roadblock_checks
 
+
+  #TODO associate roadblock with enrollment, not user
   def user1
     if self.user1_id
       User.find(self.user1_id)

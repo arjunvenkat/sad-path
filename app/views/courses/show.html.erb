@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<% unless @course.current_topic_id %>
+  <h2>Make sure you select a current topic for this course!</h2>
+<% end %>
+<% if @course.course_check_lists.empty? %>
+  <h2>Make sure you select a check list for this course!</h2>
+<% end %>
+
+<p>
+  Invite people to this class with the following URL
+  <strong>http://sad-path.herokuapp.com/enroll/<%= @course.enrollment_hash %></strong>
+</p>
+
 <p>
   <strong>Name:</strong>
   <%= @course.name %>
@@ -47,7 +59,7 @@
 <%= form_for(CourseCheckList.new) do |f| %>
   <%= f.collection_select :check_list_id, CheckList.all, :id, :name %>
   <%= f.hidden_field :course_id, value: @course.id %>
-  <%= f.submit %>
+  <%= f.submit "Add checklist" %>
 <% end %>
 
 

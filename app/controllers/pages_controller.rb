@@ -9,11 +9,24 @@ class PagesController < ApplicationController
     end
   end
 
+  def enroll
+    @course = Course.find_by_enrollment_hash(params[:enrollment_hash])
+    if current_user
+      Enrollment.create(course_id: @course.id, user_id: current_user.id)
+      if current_user_2
+        Enrollment.create(course_id: @course.id, user_id: current_user_2.id)
+      end
+      redirect_to root_url
+    else
+      render 'enroll'
+    end
+  end
+
 
   def stuck
     unless current_roadblock
       @current_roadblock = Roadblock.create(course_id: current_course.id, topic_id: current_course.current_topic_id ,user1_id: session[:user_id], user2_id: session[:user2_id])
-      check_list_items = current_course.check_lists.first.check_list_items
+      check_list_items = current_course.selected_check_list.check_list_items
       check_list_items.each do |cli|
         @current_roadblock.roadblock_checks.create(check_id: cli.check.id)
       end

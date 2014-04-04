@@ -28,7 +28,7 @@ c3 = Check.create(description: "Google it")
 CheckList.destroy_all
 cl1 = CheckList.create(name: "first list")
 
-CheckListItem.destroy_all
-cli1 = CheckListItem.create(check_id: c1.id, check_list_id: cl1.id)
-cli2 = CheckListItem.create(check_id: c2.id, check_list_id: cl1.id)
-cli3 = CheckListItem.create(check_id: c3.id, check_list_id: cl1.id)
+# CheckListItem.destroy_all
+# cli1 = CheckListItem.create(check_id: c1.id, check_list_id: cl1.id)
+# cli2 = CheckListItem.create(check_id: c2.id, check_list_id: cl1.id)
+# cli3 = CheckListItem.create(check_id: c3.id, check_list_id: cl1.id)

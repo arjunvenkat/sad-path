@@ -35,6 +35,9 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
+        unless @topic.course.current_topic_id
+          @topic.set_current
+        end
         format.html { redirect_to :back, notice: 'Topic was successfully created.' }
         format.json { render action: 'show', status: :created, location: @topic }
       else

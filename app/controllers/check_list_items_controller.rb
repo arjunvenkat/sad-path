@@ -56,7 +56,7 @@ class CheckListItemsController < ApplicationController
   def destroy
     @check_list_item.destroy
     respond_to do |format|
-      format.html { redirect_to check_list_items_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

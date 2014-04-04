@@ -46,16 +46,17 @@ class CheckListsController < ApplicationController
     if params[:new_check_list_item][:id].present?
       @check_list.check_list_items.create(check_id: params[:new_check_list_item][:id])
     end
-    params[:cli].each do |cli_array|
-      cli = CheckListItem.find(cli_array[0].to_i)
-      cli.position = cli_array[1].to_i
-      cli.save
-      # logger.debug "hello: #{cli}"
+    if params[:cli]
+      params[:cli].each do |cli_array|
+        cli = CheckListItem.find(cli_array[0].to_i)
+        cli.position = cli_array[1].to_i
+        cli.save
+      end
     end
 
     respond_to do |format|
       if @check_list.update(check_list_params)
-        format.html { redirect_to @check_list, notice: 'Check list was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Check list was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

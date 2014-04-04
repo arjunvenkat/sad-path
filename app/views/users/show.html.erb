@@ -19,10 +19,10 @@
     </p>
 
     <% if @user.id == session[:user_id].to_i || @user.id == session[:user2_id].to_i %>
-      <%= link_to 'Edit', edit_user_path(@user) %> |
-      <%= link_to 'Destroy', user_path(@user), method: :delete, data: { confirm: "Are you sure?"}  %> |
+      <%= link_to 'Edit your info', edit_user_path(@user) %>
+      <%#= link_to 'Destroy your account', user_path(@user), method: :delete, data: { confirm: "Are you sure?"}  %>
     <% end %>
-      <%= link_to 'Back', users_path %>
+
   </div>
 </div>
 
@@ -33,12 +33,21 @@
       <% roadblocks = @user.roadblocks.order(created_at: :desc) %>
       <% roadblocks.each do |roadblock| %>
         <%= link_to(roadblock, class: "list-group-item") do %>
+          <% headline = "No info available" %>
+          <% roadblock.roadblock_checks.each do |rbc| %>
+            <% if rbc.user_input.present? %>
+              <% headline = rbc.user_input %>
+              <% break %>
+            <% end %>
+          <% end %>
           <h5 class="list-group-item-heading">
-            <%= truncate(roadblock.error_message, length: 60)%>
+            <%= truncate(headline, length: 60)%>
           </h5>
-          <p class="list-group-item-text">
-            <%= truncate(roadblock.description, length: 160)  %>
-          </p>
+          <% roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
+            <p class="list-group-item-text">
+              <%= rbc.check.description %>
+            </p>
+          <% end %>
         <% end %>
       <% end %>
     </div>

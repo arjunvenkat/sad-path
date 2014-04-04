@@ -19,9 +19,10 @@ SadpathVer2::Application.routes.draw do
   get "/login" => "sessions#new"
   post "sessions/create" => "sessions#create"
   delete "logout" => "sessions#destroy"
-  root 'pages#home'
+  root 'pages#stuck'
   get 'stuck' => 'pages#stuck'
   get '/move-on' => 'pages#move_on'
+  get '/enroll/:enrollment_hash' => 'pages#enroll'
   get "/longlist" => "roadblocks#longlist"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -24,5 +24,12 @@ class ApplicationController < ActionController::Base
     @current_roadblock = @current_roadblock || Roadblock.find_by_id(session[:roadblock_id])
   end
 
+  before_action :check_if_logged_in
+
+  def check_if_logged_in
+    unless current_user
+      redirect_to '/login'
+    end
+  end
 
 end
