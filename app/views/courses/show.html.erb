@@ -7,16 +7,20 @@
 
 
 <h3>Topics</h3>
-<p>Click a topic to set it as the current topic</p>
-<% @course.topics.each do |topic| %>
-  <div>
-    <% if topic.current? %>
-      <strong><%= link_to topic.name, "/topics/#{topic.id}/set_current" %> (current) </strong>
-    <% else %>
-      <%= link_to topic.name, "/topics/#{topic.id}/set_current" %>
-    <% end %>
-    - <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
+<% if @course.topics.present? %>
+  <p>Click a topic to set it as the current topic</p>
+  <% @course.topics.each do |topic| %>
+    <div>
+      <% if topic.current? %>
+        <strong><%= link_to topic.name, "/topics/#{topic.id}/set_current" %> (current) </strong>
+      <% else %>
+        <%= link_to topic.name, "/topics/#{topic.id}/set_current" %>
+      <% end %>
+      - <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+<% else %>
+  <p>You have no topics yet, make sure to add one!</p>
 <% end %>
 
 
