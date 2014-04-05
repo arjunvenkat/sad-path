@@ -6,6 +6,7 @@ SadpathVer2::Application.routes.draw do
   resources :course_check_lists
   resources :check_lists
   resources :roadblock_checks
+  get '/roadblock_checks/:id/reopen' => 'roadblock_checks#reopen'
   resources :checks
   resources :enrollments
   resources :courses

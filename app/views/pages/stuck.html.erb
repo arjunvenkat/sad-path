@@ -1,7 +1,8 @@
 <div class="row">
+  <h1>Current Topic: <%= @current_roadblock.topic.name  %></h1>
+</div>
+<div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h1><%= @current_roadblock.topic.name  %></h1>
-    <a href="/move-on">Forget it, move on to a different roadblock</a>
     <% if @current_roadblock.solved %>
       <h2>One last thing</h2>
       <p><%= link_to "Nevermind, it's not fixed", "/roadblocks/#{@current_roadblock.id}/not-solved"  %></p>
@@ -15,27 +16,61 @@
         <%= submit_tag nil, class: "btn btn-large btn-success" %>
       <% end %>
     <% else %>
-      <div>
-        <%= link_to "Fixed it!", "/roadblocks/#{@current_roadblock.id}/solved-it", class: "btn btn-large btn-success"  %>
+      <div class="row">
+        <div class="col-md-8">
+          <% if @next_rbcheck %>
+            <h2>You're on check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h2>
+            <% if @next_rbcheck.position > 1 %>
+              <a href="/move-on">Forget it, move on to a different roadblock</a>
+            <% end %>
+          <% else %>
+            <h2>Completed all checks</h2>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+            <%= link_to "I Fixed it!", "/roadblocks/#{@current_roadblock.id}/solved-it", class: "btn btn-lg btn-success solved-it"  %>
+        </div>
       </div>
     <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <section class="completed-checks">
+      <% @completed_rbchecks.each do |rc| %>
+        <div class="completed-check">
+          <% if rc.completed %>
+            <h4><%= rc.check.description %></h4>
+            <% if rc.check.input_label %>
+              <% if rc.user_input.present? %>
+                <p class="completed-input"><%= rc.user_input %></p>
+              <% else %>
+                <p class="completed-input">Nothing was typed in</p>
+              <% end %>
+              <div><a href="/roadblock_checks/<%= rc.id %>/reopen">Edit</a></div>
+            <% end %>
+            <span class="completed-check-mark fa fa-check"></span>
+          <% else %>
+            <%= form_for(rc) do |f| %>
+              <% if rc.check.input_label.present? %>
+                <div class="form-group">
+                  <%= f.label :user_input, rc.check.input_label.to_sym %>
+                  <%= f.text_area :user_input, placeholder: rc.check.input_example, class: "form-control" %>
+                </div>
+              <% end %>
+                <%= f.hidden_field :completed_at, value: DateTime.now %>
+                <%= f.hidden_field :completed, value: true %>
+                <div class="form-group">
+                  <%= f.submit "update", class: "btn btn-large btn-default" %>
+                </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
 
-    <% if @next_rbcheck %>
-      <h2>Check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h2>
-    <% else %>
-      <h2>Completed all checks</h2>
-    <% end %>
-
-    <% @completed_rbchecks.each do |rc| %>
-      <div>
-        <h4><%= rc.check.description %></h4>
-        <% if rc.user_input %>
-          <p><%= rc.user_input %></p>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div>
+    <div class="next-check">
       <% if @next_rbcheck %>
         <h3><%= @next_rbcheck.check.description %></h3>
         <%= form_for(@next_rbcheck) do |f| %>
@@ -46,16 +81,14 @@
             </div>
           <% end %>
             <%= f.hidden_field :completed_at, value: DateTime.now %>
+            <%= f.hidden_field :completed, value: true %>
             <div class="form-group">
-            <% if @next_rbcheck.completed_at > DateTime.new(1970,1,1) %>
-              <%= f.submit "update", class: "btn btn-large btn-default" %>
-            <% else %>
               <%= f.submit "completed", class: "btn btn-large btn-default" %>
-            <% end %>
             </div>
         <% end %>
       <% else %>
-        <%= link_to "Ask for help", "/roadblocks/#{@current_roadblock.id}/need-help", class: "btn btn-large btn-danger"  %>
+        <h3>Wow, looks like this is a tough one</h3>
+        <div><%= link_to "Ask for help", "/roadblocks/#{@current_roadblock.id}/need-help", class: "btn btn-lg btn-danger"  %></div>
       <% end %>
     </div>
   </div>

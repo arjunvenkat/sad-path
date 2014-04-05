@@ -1,5 +1,11 @@
 class RoadblockChecksController < ApplicationController
-  before_action :set_roadblock_check, only: [:show, :edit, :update, :destroy]
+  before_action :set_roadblock_check, only: [:show, :edit, :update, :destroy, :reopen]
+
+  def reopen
+    @roadblock_check.completed = false
+    @roadblock_check.save
+    redirect_to :back
+  end
 
   # GET /roadblock_checks
   # GET /roadblock_checks.json
@@ -69,6 +75,6 @@ class RoadblockChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roadblock_check_params
-      params.require(:roadblock_check).permit(:check_id, :roadblock_id, :completed_at, :solved_it, :user_input)
+      params.require(:roadblock_check).permit(:check_id, :roadblock_id, :completed_at, :completed, :solved_it, :user_input)
     end
 end
