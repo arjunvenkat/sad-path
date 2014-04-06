@@ -76,6 +76,7 @@
     <div class="next-check">
       <% if @next_rbcheck %>
         <h3><%= @next_rbcheck.check.description %></h3>
+        <p><%= @next_rbcheck.check.more_info %></p>
         <%= form_for(@next_rbcheck) do |f| %>
           <% if @next_rbcheck.check.input_label.present? %>
             <div class="form-group">
@@ -90,7 +91,7 @@
             </div>
         <% end %>
       <% else %>
-        <h3>Wow, looks like this is a tough one</h3>
+        <h3>Looks like this is a tough one</h3>
         <div><%= link_to "Ask for help", "/roadblocks/#{@current_roadblock.id}/need-help", class: "btn btn-lg btn-danger"  %></div>
       <% end %>
     </div>
