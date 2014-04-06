@@ -69,6 +69,6 @@ class ChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def check_params
-      params.require(:check).permit(:description, :input_label, :input_example)
+      params.require(:check).permit(:description, :more_info, :input_label, :input_example)
     end
 end

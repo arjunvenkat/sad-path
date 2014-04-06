@@ -1,5 +1,7 @@
 <div class="row">
-  <h1>Current Topic: <%= @current_roadblock.topic.name  %></h1>
+  <div class="col-md-12">
+    <h1>Current Topic: <%= @current_roadblock.topic.name  %></h1>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -19,7 +21,8 @@
       <div class="row">
         <div class="col-md-8">
           <% if @next_rbcheck %>
-            <h2>You're on check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h2>
+            <h3>You're on check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h3>
+            <p>Work through these checks to try and solve the problem on your own. </p>
             <% if @next_rbcheck.position > 1 %>
               <a href="/move-on">Forget it, move on to a different roadblock</a>
             <% end %>
