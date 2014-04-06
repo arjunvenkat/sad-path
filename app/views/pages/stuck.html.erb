@@ -22,7 +22,7 @@
         <div class="col-md-8">
           <% if @next_rbcheck %>
             <h3>You're on check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h3>
-            <p>Work through these checks to try and solve the problem on your own. </p>
+            <p>Work through these checks to try and solve the problem on your own. Ask for help if you still need it by the end.</p>
             <% if @next_rbcheck.position > 1 %>
               <a href="/move-on">Forget it, move on to a different roadblock</a>
             <% end %>

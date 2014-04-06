@@ -1,0 +1,33 @@
+<h1>Roadblocks</h1>
+
+<div class="roadblocks-filter <%= @filter_class %>">
+  <a class="solved" href="/roadblocks-dash?filter=solved">Solved</a>
+  <a class="open" href="/roadblocks-dash?filter=open">Open</a>
+</div>
+
+<div>
+  <a href="#"></a>
+</div>
+
+
+<% @roadblocks.each do |rb|  %>
+  <% if rb.solved  %>
+      <% solved_class = 'rb-solved' %>
+  <% elsif rb.need_help %>
+    <% solved_class = 'rb-help' %>
+  <% end %>
+<div class="roadblock <%= solved_class %>">
+  <% rb.roadblock_checks.each do |rbc| %>
+    <% if rbc.check.input_label.present? %>
+      <h4><%= rbc.check.input_label %></h4>
+      <div>
+      <% if rbc.user_input.present? %>
+        <%= rbc.user_input %>
+      <% else %>
+        input not present
+      <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<% end %>

@@ -23,6 +23,7 @@ SadpathVer2::Application.routes.draw do
   root 'pages#stuck'
   get 'stuck' => 'pages#stuck'
   get '/move-on' => 'pages#move_on'
+  get '/roadblocks-dash' => 'pages#roadblocks'
   get '/enroll/:enrollment_hash' => 'pages#enroll'
   get '/error' => 'pages#error'
   get "/longlist" => "roadblocks#longlist"

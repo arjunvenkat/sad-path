@@ -9,6 +9,18 @@ class PagesController < ApplicationController
     end
   end
 
+  def roadblocks
+    if params[:filter] == 'solved'
+      @roadblocks = current_course.roadblocks.where(solved: true)
+      @filter_class = 'solved'
+    elsif params[:filter] == 'open'
+      @roadblocks = current_course.roadblocks.where(need_help: true)
+      @filter_class = 'open'
+    else
+      @roadblocks = current_course.roadblocks
+    end
+  end
+
   def error
     @errors = []
     if current_course.current_topic_id.blank?
