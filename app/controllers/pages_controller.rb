@@ -42,15 +42,16 @@ class PagesController < ApplicationController
 
   def enroll
     @course = Course.find_by_enrollment_hash(params[:enrollment_hash])
-    if current_user
-      Enrollment.create(course_id: @course.id, user_id: current_user.id)
-      if current_user_2
-        Enrollment.create(course_id: @course.id, user_id: current_user_2.id)
-      end
-      redirect_to root_url
-    else
-      render 'enroll'
-    end
+    # if current_user
+    #   Enrollment.create(course_id: @course.id, user_id: current_user.id)
+    #   if current_user_2
+    #     Enrollment.create(course_id: @course.id, user_id: current_user_2.id)
+    #   end
+    #   redirect_to root_url
+    # else
+    #   render 'enroll'
+    # end
+    render 'enroll'
   end
 
 

@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         logger.debug "user_id: #{session[:user_id]}"
         session[:course_id] = enrollment.course.id
         logger.debug "course_id: #{session[:course_id]}"
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to enrollment, notice: 'Account was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
