@@ -1,57 +1,75 @@
-<h1>Roadblocks for <%= @current_course.name %></h1>
+<div class="row">
+  <div class="col-md-12">
+      <h1>Roadblocks for <%= @current_course.name %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="filter-box">
+      <div class="class roadblocks-filter <%= @filter %>">
+        <span class="link-title">All Roadblocks: </span>
+        <a class="class-solved" href="/roadblocks-dash?filter=class-solved">Solved</a>
+        <a class="class-open" href="/roadblocks-dash?filter=class-open">Open</a>
+      </div>
 
-<div class="class roadblocks-filter <%= @filter %>">
-  <span class="link-title">All Roadblocks: </span>
-  <a class="class-solved" href="/roadblocks-dash?filter=class-solved">Solved</a>
-  <a class="class-open" href="/roadblocks-dash?filter=class-open">Open</a>
+      <div class="your roadblocks-filter <%= @filter %>">
+        <span class="link-title">Your Roadblocks: </span>
+        <a class="your-solved" href="/roadblocks-dash?filter=your-solved">Solved</a>
+        <a class="your-open" href="/roadblocks-dash?filter=your-open">Open</a>
+        <a class="your-unfinished" href="/roadblocks-dash?filter=your-unfinished">Unfinished</a>
+      </div>
+    </div>
+    <div>
+      <a href="#"></a>
+    </div>
+  </div>
 </div>
 
-<div class="your roadblocks-filter <%= @filter %>">
-  <span class="link-title">Your Roadblocks: </span>
-  <a class="your-solved" href="/roadblocks-dash?filter=your-solved">Solved</a>
-  <a class="your-open" href="/roadblocks-dash?filter=your-open">Open</a>
-  <a class="your-unfinished" href="/roadblocks-dash?filter=your-unfinished">Unfinished</a>
-</div>
-
-<div>
-  <a href="#"></a>
-</div>
-
-
-<% @roadblocks.each do |rb|  %>
-  <% if rb.solved  %>
-      <% solved_class = 'rb-solved' %>
-  <% elsif rb.need_help %>
-    <% solved_class = 'rb-help' %>
-  <% end %>
-  <div id="roadblock-<%= rb.id %>" class="roadblock <%= solved_class %>">
-    <h3><%= rb.id %>
-      Name: <%= rb.user1.first %> <%= rb.user1.last %>
-      <% if rb.user2 %>
-        & <%= rb.user2.first %> <%= rb.user2.last %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% @roadblocks.each do |rb|  %>
+      <% if rb.solved  %>
+          <% solved_class = 'panel-success' %>
+      <% elsif rb.need_help %>
+        <% solved_class = 'panel-danger' %>
+      <% else %>
+        <% solved_class = 'panel-default' %>
       <% end %>
-    </h3>
-    <% rb.roadblock_checks.each do |rbc| %>
-      <% if rbc.check.input_label.present? %>
-        <h4><%= rbc.check.input_label %></h4>
-        <div>
-        <% if rbc.user_input.present? %>
-          <%= rbc.user_input %>
-        <% else %>
-          input not present
-        <% end %>
+      <div id="roadblock-<%= rb.id %>" class="panel <%= solved_class %>">
+        <div class="panel-heading">
+          <h3 class="panel-title">#<%= rb.id %>
+            - <%= rb.user1.first %> <%= rb.user1.last %>
+            <% if rb.user2 %>
+              & <%= rb.user2.first %> <%= rb.user2.last %>
+            <% end %>
+          </h3>
         </div>
-      <% end %>
+        <div class="panel-body">
+          <% rb.roadblock_checks.each do |rbc| %>
+            <% if rbc.check.input_label.present? %>
+              <h4><%= rbc.check.input_label %></h4>
+              <div>
+              <% if rbc.user_input.present? %>
+                <pre><%= rbc.user_input %></pre>
+              <% else %>
+                input not present
+              <% end %>
+              </div>
+            <% end %>
+          <% end %>
+          <% solutions = rb.roadblock_checks.where(solved_it: true) %>
+          <% if solutions.present? %>
+            <h3>Solution:</h3>
+            <% solutions.each do |rbc| %>
+              <p><%= rbc.check.description %></p>
+            <% end %>
+          <% end %>
+          <% if rb.enrollment == current_enrollment %>
+            <div><a href="/roadblocks/<%= rb.id %>/edit">Edit</a></div>
+          <% end %>
+        </div>
+    </div>
     <% end %>
-    <% solutions = rb.roadblock_checks.where(solved_it: true) %>
-    <% if solutions.present? %>
-      <h3>Solution:</h3>
-      <% solutions.each do |rbc| %>
-        <p><%= rbc.check.description %></p>
-      <% end %>
-    <% end %>
-    <% if rb.enrollment == current_enrollment %>
-      <div><a href="/roadblocks/<%= rb.id %>/edit">Edit</a></div>
-    <% end %>
+  </div>
 </div>
-<% end %>
+
