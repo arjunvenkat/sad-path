@@ -25,7 +25,9 @@ class ChecksController < ApplicationController
   # POST /checks.json
   def create
     @check = Check.new(check_params)
-
+    if current_enrollment.instructor
+      @check.instructor_created = true
+    end
     respond_to do |format|
       if @check.save
         format.html { redirect_to @check, notice: 'Check was successfully created.' }
