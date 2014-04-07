@@ -1,5 +1,6 @@
 class Roadblock < ActiveRecord::Base
   # belongs_to :course
+  default_scope order('created_at DESC')
   belongs_to :topic
   has_many :roadblock_checks, -> { order("position ASC") }, dependent: :destroy
   has_many :checks, through: :roadblock_checks

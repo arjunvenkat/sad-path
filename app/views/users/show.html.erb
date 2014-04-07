@@ -3,13 +3,15 @@
   <div class="col-md-6 col-md-offset-3">
     <p id="notice"><%= notice %></p>
 
+
+    <h1>Your info</h1>
     <p>
-      <strong>First:</strong>
+      <strong>First name:</strong>
       <%= @user.first %>
     </p>
 
     <p>
-      <strong>Last:</strong>
+      <strong>Last name:</strong>
       <%= @user.last %>
     </p>
 
@@ -23,34 +25,6 @@
       <%#= link_to 'Destroy your account', user_path(@user), method: :delete, data: { confirm: "Are you sure?"}  %>
     <% end %>
 
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h2>Your Roadblocks</h2>
-    <div class="list-group roadblocks-list">
-      <% roadblocks = @user.roadblocks.order(created_at: :desc) %>
-      <% roadblocks.each do |roadblock| %>
-        <%= link_to(roadblock, class: "list-group-item") do %>
-          <% headline = "No info available" %>
-          <% roadblock.roadblock_checks.each do |rbc| %>
-            <% if rbc.user_input.present? %>
-              <% headline = rbc.user_input %>
-              <% break %>
-            <% end %>
-          <% end %>
-          <h5 class="list-group-item-heading">
-            <%= truncate(headline, length: 60)%>
-          </h5>
-          <% roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
-            <p class="list-group-item-text">
-              <%= rbc.check.description %>
-            </p>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
   </div>
 </div>
 

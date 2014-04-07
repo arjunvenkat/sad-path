@@ -34,4 +34,8 @@ class Course < ActiveRecord::Base
     self.enrollments.map {|e| e.user if e.instructor}.compact
   end
 
+  def current_topic
+    Topic.find_by_id(self.current_topic_id)
+  end
+
 end

@@ -1,6 +1,53 @@
-<h1>Editing roadblock</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Editing roadblock</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% @roadblock.roadblock_checks.each do |rbc| %>
+      <%= form_for(rbc) do |f| %>
+        <% if rbc.check.input_label.present? %>
+          <div class="form-group">
+            <%= f.label :user_input, rbc.check.input_label.to_sym %>
+            <%= f.text_area :user_input, placeholder: rbc.check.input_example, class: "form-control" %>
+          </div>
+          <%= f.hidden_field :completed_at, value: DateTime.now %>
+          <%= f.hidden_field :completed, value: true %>
+          <div class="form-group">
+            <%= f.submit "update", class: "btn btn-large btn-default" %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if @roadblock.solved %>
+      <% if @roadblock.roadblock_checks.where(solved_it: true).empty? %>
+        <%= form_tag("/roadblocks/#{@roadblock.id}/add-sol") do %>
+          <div class="form-group">
+            <%= label_tag :solution, "What would you check to make sure this doesn't happen again?" %>
+            <%= text_field_tag :solution, nil, placeholder: "ex) Try restarting the Rails server", class: "form-control" %>
+          </div>
+          <%#= hidden_field_tag :roadblock_id, @current_roadblock.id %>
+          <%= submit_tag nil, class: "btn btn-large btn-success" %>
+        <% end %>
+      <% else %>
+        <% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
+          <%= form_tag("/roadblocks/#{@roadblock.id}/update-sol") do %>
+            <div class="form-group">
+              <%= label_tag :solution, "What would you check to make sure this doesn't happen again?" %>
+              <%= text_field_tag :solution, rbc.check.description, placeholder: "ex) Try restarting the Rails server", class: "form-control" %>
+            </div>
+            <%= hidden_field_tag :check_id, rbc.check.id %>
+            <%#= hidden_field_tag :roadblock_id, @current_roadblock.id %>
+            <%= submit_tag nil, class: "btn btn-large btn-success" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to "I Fixed it!", "/roadblocks/#{@roadblock.id}/solved-it", class: "btn btn-lg btn-success solved-it"  %>
+    <% end %>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @roadblock %> |
-<%= link_to 'Back', roadblocks_path %>
+    <%= link_to 'Back to roadblocks', '/roadblocks-dash' %>
+  </div>
+</div>

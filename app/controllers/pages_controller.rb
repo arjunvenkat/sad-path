@@ -10,12 +10,21 @@ class PagesController < ApplicationController
   end
 
   def roadblocks
-    if params[:filter] == 'solved'
-      @roadblocks = current_course.roadblocks.where(solved: true)
-      @filter_class = 'solved'
-    elsif params[:filter] == 'open'
-      @roadblocks = current_course.roadblocks.where(need_help: true)
-      @filter_class = 'open'
+    if params[:filter] == 'class-solved'
+      @roadblocks = current_course.current_topic.roadblocks.where(solved: true)
+      @filter = 'class-solved'
+    elsif params[:filter] == 'class-open'
+      @roadblocks = current_course.current_topic.roadblocks.where(need_help: true)
+      @filter = 'class-open'
+    elsif params[:filter] == 'your-solved'
+      @roadblocks = current_enrollment.roadblocks.where(solved: true)
+      @filter = 'your-solved'
+    elsif params[:filter] == 'your-open'
+      @roadblocks = current_enrollment.roadblocks.where(need_help: true)
+      @filter = 'your-open'
+    elsif params[:filter] == 'your-unfinished'
+      @roadblocks = current_enrollment.roadblocks.where(solved: false, need_help: false)
+      @filter = 'your-unfinished'
     else
       @roadblocks = current_course.roadblocks
     end

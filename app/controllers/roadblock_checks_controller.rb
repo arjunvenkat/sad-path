@@ -48,7 +48,7 @@ class RoadblockChecksController < ApplicationController
   def update
     respond_to do |format|
       if @roadblock_check.update(roadblock_check_params)
-        format.html { redirect_to "/stuck"}
+        format.html { redirect_to :back, notice: 'Updated successfully'}
         format.json { head :no_content }
       else
         format.html { redirect_to "/stuck" }

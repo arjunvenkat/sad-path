@@ -24,10 +24,6 @@
     <%= f.text_field :email, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= label_tag :course_id, "course" %><br>
-    <%= collection_select :course, :id, Course.all, :id, :name, {prompt: true}, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label :password %><br>
     <%= f.password_field :password, class: "form-control" %>
   </div>

@@ -1,32 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<% @roadblock.roadblock_checks.where('user_input IS NOT NULL AND user_input != ?', "").each do |rbc| %>
-  <p>
-    <strong><%= rbc.check.input_label %></strong>
-    <pre><%= rbc.user_input %></pre>
-  </p>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% @roadblock.roadblock_checks.where('user_input IS NOT NULL AND user_input != ?', "").each do |rbc| %>
+      <p>
+        <strong><%= rbc.check.input_label %></strong>
+        <pre><%= rbc.user_input %></pre>
+      </p>
+    <% end %>
 
-<h3>Solution</h3>
-<% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
-  <p><%= rbc.check.description %></p>
-<% end %>
+    <h3>Solution</h3>
+    <% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
+      <p><%= rbc.check.description %></p>
+    <% end %>
 
-<p>
-  <strong>User1:</strong>
-  <%= @roadblock.user1.first %> <%= @roadblock.user1.last %>
-</p>
-
-<% if @roadblock.user2 %>
     <p>
-      <strong>User2:</strong>
-      <%= @roadblock.user2.first %> <%= @roadblock.user2.last %>
+      <strong>User1:</strong>
+      <%= @roadblock.user1.first %> <%= @roadblock.user1.last %>
     </p>
-<% end %>
+
+    <% if @roadblock.user2 %>
+        <p>
+          <strong>User2:</strong>
+          <%= @roadblock.user2.first %> <%= @roadblock.user2.last %>
+        </p>
+    <% end %>
 
 
-<% if session[:user_id].to_i == @roadblock.user1_id || session[:user_id].to_i == @roadblock.user2_id || session[:user2_id].to_i == @roadblock.user1_id || session[:user2_id].to_i == @roadblock.user2_id  %>
-  <%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |
-  <%= link_to 'Delete', roadblock_path(@roadblock), method: :delete, data: { confirm: "Are you sure?" } %> |
-<% end %>
-<%= link_to 'Back', roadblocks_path %>
+    <% if session[:user_id].to_i == @roadblock.user1_id || session[:user_id].to_i == @roadblock.user2_id || session[:user2_id].to_i == @roadblock.user1_id || session[:user2_id].to_i == @roadblock.user2_id  %>
+      <%= link_to 'Edit', edit_roadblock_path(@roadblock) %> |
+      <%= link_to 'Delete', roadblock_path(@roadblock), method: :delete, data: { confirm: "Are you sure?" } %> |
+    <% end %>
+    <%= link_to 'Roadblocks', '/roadblocks-dash' %>
+  </div>
+</div>
