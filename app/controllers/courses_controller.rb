@@ -35,6 +35,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        Enrollment.create(user_id: current_user.id, course_id: @course.id, instructor: true)
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else
