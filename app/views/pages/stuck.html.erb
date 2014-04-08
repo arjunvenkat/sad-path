@@ -59,7 +59,7 @@
               <% if rc.check.input_label.present? %>
                 <div class="form-group">
                   <%= f.label :user_input, rc.check.input_label.to_sym %>
-                  <%= f.text_area :user_input, placeholder: rc.check.input_example, class: "form-control" %>
+                  <%= f.text_area :user_input, placeholder: rc.check.input_example, rows: 5, class: "form-control" %>
                 </div>
               <% end %>
                 <%= f.hidden_field :completed_at, value: DateTime.now %>
@@ -81,7 +81,7 @@
           <% if @next_rbcheck.check.input_label.present? %>
             <div class="form-group">
               <%= f.label :user_input, @next_rbcheck.check.input_label.to_sym %>
-              <%= f.text_area :user_input, placeholder: @next_rbcheck.check.input_example, class: "form-control" %>
+              <%= f.text_area :user_input, placeholder: @next_rbcheck.check.input_example, rows: 5, class: "form-control" %>
             </div>
           <% end %>
             <%= f.hidden_field :completed_at, value: DateTime.now %>

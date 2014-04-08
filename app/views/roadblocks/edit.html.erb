@@ -10,7 +10,7 @@
         <% if rbc.check.input_label.present? %>
           <div class="form-group">
             <%= f.label :user_input, rbc.check.input_label.to_sym %>
-            <%= f.text_area :user_input, placeholder: rbc.check.input_example, class: "form-control" %>
+            <%= f.text_area :user_input, placeholder: rbc.check.input_example, rows: 5, class: "form-control" %>
           </div>
           <%= f.hidden_field :completed_at, value: DateTime.now %>
           <%= f.hidden_field :completed, value: true %>
@@ -25,7 +25,7 @@
         <%= form_tag("/roadblocks/#{@roadblock.id}/add-sol") do %>
           <div class="form-group">
             <%= label_tag :solution, "What would you check to make sure this doesn't happen again?" %>
-            <%= text_field_tag :solution, nil, placeholder: "ex) Try restarting the Rails server", class: "form-control" %>
+            <%= text_area_tag :solution, nil, placeholder: "ex) Try restarting the Rails server", rows: 5, class: "form-control" %>
           </div>
           <%#= hidden_field_tag :roadblock_id, @current_roadblock.id %>
           <%= submit_tag nil, class: "btn btn-large btn-success" %>
@@ -35,7 +35,7 @@
           <%= form_tag("/roadblocks/#{@roadblock.id}/update-sol") do %>
             <div class="form-group">
               <%= label_tag :solution, "What would you check to make sure this doesn't happen again?" %>
-              <%= text_field_tag :solution, rbc.check.description, placeholder: "ex) Try restarting the Rails server", class: "form-control" %>
+              <%= text_area_tag :solution, rbc.check.description, placeholder: "ex) Try restarting the Rails server", rows: 5, class: "form-control" %>
             </div>
             <%= hidden_field_tag :check_id, rbc.check.id %>
             <%#= hidden_field_tag :roadblock_id, @current_roadblock.id %>
