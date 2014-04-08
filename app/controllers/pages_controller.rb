@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  skip_before_action :check_if_logged_in, only: [:enroll]
+
   def home
     if session[:user_id]
       current_course = Course.find(session[:course_id])
