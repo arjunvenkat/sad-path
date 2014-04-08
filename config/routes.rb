@@ -10,6 +10,7 @@ SadpathVer2::Application.routes.draw do
   resources :checks
   resources :enrollments
   resources :courses
+  get '/roadblocks' => 'pages#roadblocks'
   resources :roadblocks
   get '/roadblocks/:id/need-help' => 'roadblocks#need_help'
   get '/roadblocks/:id/solved-it' => 'roadblocks#solved_it'

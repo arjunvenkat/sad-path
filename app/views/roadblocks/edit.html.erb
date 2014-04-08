@@ -48,6 +48,7 @@
     <% end %>
 
 
-    <%= link_to 'Back to roadblocks', '/roadblocks-dash' %>
+    <%= link_to 'Back to roadblocks', '/roadblocks-dash' %> |
+    <%= link_to 'Destroy', @roadblock, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
 </div>
