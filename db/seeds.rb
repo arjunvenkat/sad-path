@@ -22,7 +22,7 @@
 
 # Check.destroy_all
 # c1 = Check.create(description: "Re-read your error message", more_info: "Check the line number and the specific error message. If your roadblock doesn't have an error message, type in 'N/A'", input_label: "Paste your error message below, along with the line number", input_example: "SyntaxError in Pages#home - line #12")
-# c2 = Check.create(description: "Look through nearby code", more_info: "The error message is just a guess, so check your code around the line number from the error message to see if anything looks out of place. If your roadblock doesnt't have a related error message or code snippet, type in 'N/A'", input_label: "Paste your related code snippet below", input_example: "<%= if @next_rbcheck %>")
+# c2 = Check.create(description: "Look through nearby code", more_info: "The error message is just a guess, so check your code around the line number from the error message to see if anything looks out of place. If your roadblock doesnt't have a related error message or code snippet, type in 'N/A'", input_label: "Paste your related code snippet below", input_example: "Paste in the problem line along with surrounding lines of code")
 # c3 = Check.create(description: "Describe your roadblock", more_info: "Please use enough detail for someone else to follow along. Describe what you want to happen, what is going wrong, and what you've tried so far.", input_label: "Describe your roadblock", input_example: "I want to loop through a list of users and display their first names. The entire array is getting displayed at the bottom for some reason. I have tried Googling and asking my neighbor.")
 
 # c4 = Check.create(description: "Ask a neighbor")
