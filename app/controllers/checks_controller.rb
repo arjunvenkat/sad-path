@@ -1,5 +1,6 @@
 class ChecksController < ApplicationController
   before_action :set_check, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin, only: [:update, :destroy]
 
   # GET /checks
   # GET /checks.json
@@ -65,6 +66,13 @@ class ChecksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def check_if_admin
+      unless current_user.admin
+        redirect_to "/login"
+      end
+    end
+
     def set_check
       @check = Check.find(params[:id])
     end
