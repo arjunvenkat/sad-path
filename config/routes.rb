@@ -2,6 +2,9 @@ SadpathVer2::Application.routes.draw do
   resources :topics do
     get "/set_current" => "topics#set_current"
   end
+
+  get "/set_current_course/:course_id" => 'sessions#set_current_course'
+
   resources :check_list_items
   resources :course_check_lists
   resources :check_lists
@@ -9,7 +12,7 @@ SadpathVer2::Application.routes.draw do
   get '/roadblock_checks/:id/reopen' => 'roadblock_checks#reopen'
   resources :checks
   resources :enrollments
-  resources :courses
+
   get '/roadblocks' => 'pages#roadblocks'
   resources :roadblocks
   get '/roadblocks/:id/need-help' => 'roadblocks#need_help'

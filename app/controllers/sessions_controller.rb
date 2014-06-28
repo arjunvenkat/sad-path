@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
   skip_before_action :check_if_logged_in, only: [:new, :create]
 
+  def set_current_course
+    session[:course_id] = params[:course_id]
+
+    redirect_to "/roadblocks"
+  end
+
   def new
 
   end

@@ -32,7 +32,14 @@
         <% if session[:user_id] %>
           <% u = User.find(session[:user_id]) %>
           <% c = Course.find(session[:course_id]) %>
-          <li><a href="#"><%= current_course.name %></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_course.name %> <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <% u.courses.each do |course| %>
+                <li><a href="/set_current_course/<%= course.id %>"><%= course.name %></a></li>
+              <% end %>
+            </ul>
+          </li>
           <% if session[:user2_id] %>
             <% u2 = User.find(session[:user2_id]) %>
             <li><%= link_to u.email, edit_user_path(u)  %></li>
