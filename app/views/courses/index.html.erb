@@ -12,7 +12,7 @@
 
   <tbody>
     <% @courses.each do |course| %>
-      <% if (course.instructors & [current_user, current_user_2]).present? %>
+      <% if (course.instructors & [current_user, current_user_2]).present? || current_user.admin %>
         <tr>
           <td><%= course.name %></td>
             <td><%= link_to 'Show', course %></td>
