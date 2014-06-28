@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :check_if_instructor, only: [:show, :edit, :update, :destroy]
 
+
   def check_if_instructor
     unless (@course.instructors & [current_user, current_user_2]).present?
       redirect_to user_path(@current_user)
