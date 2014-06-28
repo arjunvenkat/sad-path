@@ -64,6 +64,12 @@ class EnrollmentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def check_if_admin
+      unless current_user.admin
+        redirect_to "/login"
+      end
+    end
+
     def set_enrollment
       @enrollment = Enrollment.find(params[:id])
     end
