@@ -12,7 +12,7 @@ SadpathVer2::Application.routes.draw do
   get '/roadblock_checks/:id/reopen' => 'roadblock_checks#reopen'
   resources :checks
   resources :enrollments
-
+  resources :courses
   get '/roadblocks' => 'pages#roadblocks'
   resources :roadblocks
   get '/roadblocks/:id/need-help' => 'roadblocks#need_help'
