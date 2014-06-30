@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= label_tag :new_check_list_item, "Add a new check list item" %>
-    <%= collection_select :new_check_list_item, :id, Check.all, :id, :description, prompt: true %>
+    <%= collection_select :new_check_list_item, :id, Check.instructor_created, :id, :description, prompt: true %>
   </div>
 
   <div class="actions">
