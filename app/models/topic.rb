@@ -4,7 +4,7 @@ class Topic < ActiveRecord::Base
   has_many :roadblocks
 
   def current?
-    self.course.current_topic_id == self.id ? true : false
+    self.course.current_topic_id == self.id
   end
 
   def set_current

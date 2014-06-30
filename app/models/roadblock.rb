@@ -5,6 +5,14 @@ class Roadblock < ActiveRecord::Base
   has_many :roadblock_checks, -> { order("position ASC") }, dependent: :destroy
   has_many :checks, through: :roadblock_checks
 
+  def blank?
+    blank = true
+    self.roadblock_checks.each do |rbc|
+      blank = false if rbc.completed_at != "1970-01-01 00:00:00"
+    end
+    blank
+  end
+
   def course
     enrollment.course
   end

@@ -1,6 +1,14 @@
 class CourseCheckListsController < ApplicationController
   before_action :set_course_check_list, only: [:show, :edit, :update, :destroy]
 
+  def set_current
+    ccl = CourseCheckList.find(params[:course_check_list_id])
+    ccl.set_current
+
+    redirect_to :back
+  end
+
+
   # GET /course_check_lists
   # GET /course_check_lists.json
   def index

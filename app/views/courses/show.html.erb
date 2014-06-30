@@ -48,11 +48,22 @@
 
 
 <h3>Select a checklist</h3>
-<% @course.course_check_lists.each do |ccl| %>
-  <div>
-    <%= ccl.check_list.name %> - <%= link_to 'Destroy', ccl, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
+<% if @course.course_check_lists.present? %>
+  <p>Click a check list to set it as the current check list</p>
+  <% @course.course_check_lists.each do |ccl| %>
+    <div>
+      <% if ccl.current? %>
+        <strong><%= link_to ccl.check_list.name, "/course_check_lists/#{ccl.id}/set_current" %> (current) </strong>
+      <% else %>
+        <%= link_to ccl.check_list.name, "/course_check_lists/#{ccl.id}/set_current" %>
+      <% end %>
+      - <%= link_to 'Destroy', ccl, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+<% else %>
+  <p>You have no check lists yet, make sure to add one!</p>
 <% end %>
+
 
 <h3>Add a checklist</h3>
 

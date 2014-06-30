@@ -6,7 +6,9 @@ SadpathVer2::Application.routes.draw do
   get "/set_current_course/:course_id" => 'sessions#set_current_course'
 
   resources :check_list_items
-  resources :course_check_lists
+  resources :course_check_lists do
+    get "/set_current" => "course_check_lists#set_current"
+  end
   resources :check_lists
   resources :roadblock_checks
   get '/roadblock_checks/:id/reopen' => 'roadblock_checks#reopen'

@@ -11,6 +11,18 @@ class Course < ActiveRecord::Base
 
   before_create :generate_enrollment_hash
 
+
+  def reset_blank_roadblocks
+    self.enrollments.each do |enrollment|
+      last_rb = enrollment.roadblocks.first
+      unless last_rb == nil
+        if last_rb.blank?
+          last_rb.destroy
+        end
+      end
+    end
+  end
+
   def generate_enrollment_hash
     generate_another = true
     while generate_another
@@ -26,8 +38,13 @@ class Course < ActiveRecord::Base
     self.enrollment_hash = hash
   end
 
-  def selected_check_list
-    self.check_lists.first
+  def current_check_list
+    ccl = CourseCheckList.find_by_id(self.current_course_check_list_id)
+    if ccl
+      return ccl.check_list
+    else
+      self.course_check_lists.last.check_list
+    end
   end
 
   def instructors

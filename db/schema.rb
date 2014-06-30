@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628212844) do
+ActiveRecord::Schema.define(version: 20140630001658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140628212844) do
     t.datetime "updated_at"
     t.integer  "current_topic_id"
     t.string   "enrollment_hash"
-    t.integer  "selected_course_check_list_id"
+    t.integer  "current_course_check_list_id"
   end
 
   create_table "enrollments", force: true do |t|

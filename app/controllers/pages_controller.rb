@@ -37,7 +37,7 @@ class PagesController < ApplicationController
     if current_course.current_topic_id.blank?
       @errors << "Ask your instructor to select a topic for this course"
     end
-    if current_course.selected_check_list.blank?
+    if current_course.current_check_list.blank?
       @errors << "Ask your instructor to select a checklist for this course"
     end
   end
@@ -58,12 +58,12 @@ class PagesController < ApplicationController
 
 
   def stuck
-    if current_course.current_topic_id.blank? || current_course.selected_check_list.blank?
+    if current_course.current_topic_id.blank? || current_course.current_check_list.blank?
       redirect_to '/error'
     else
       unless current_roadblock
         @current_roadblock = Roadblock.create(course_id: current_course.id, topic_id: current_course.current_topic_id ,user1_id: session[:user_id], user2_id: session[:user2_id], enrollment_id: current_enrollment.id, second_enrollment_id: current_second_enrollment.try(:id))
-        check_list_items = current_course.selected_check_list.check_list_items
+        check_list_items = current_course.current_check_list.check_list_items
         check_list_items.each do |cli|
           @current_roadblock.roadblock_checks.create(check_id: cli.check.id)
         end

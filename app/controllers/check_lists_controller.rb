@@ -2,6 +2,7 @@ class CheckListsController < ApplicationController
   before_action :set_check_list, only: [:show, :edit, :update, :destroy]
   before_action :check_if_admin, only: [:update, :destroy]
 
+
   # GET /check_lists
   # GET /check_lists.json
   def index
