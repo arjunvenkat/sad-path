@@ -7,8 +7,11 @@ class CourseCheckList < ActiveRecord::Base
   end
 
   def set_current
+    #TODO: Fix bug here in heroku
     self.course.current_course_check_list_id = self.id
-    self.course.save
+    result = self.course.save
+    puts "did it save? #{result}"
+
     self.course.reset_blank_roadblocks
   end
 end
