@@ -8,7 +8,7 @@
         <% if @roadblock.user2 %>
           & <%= @roadblock.user2.first %> <%= @roadblock.user2.last %>
         <% end %>
-        - <%= @roadblock.created_at.strftime(" %B %d, %Y") %>
+        - <%= @roadblock.updated_at.strftime(" %B %d, %Y") %>
       </h2>
     <% @roadblock.roadblock_checks.where('user_input IS NOT NULL AND user_input != ?', "").each do |rbc| %>
       <p>
