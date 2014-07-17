@@ -23,12 +23,10 @@
           <% if @next_rbcheck %>
             <h3>You're on check <%= @next_rbcheck.position %> of <%= @current_roadblock.roadblock_checks.count %></h3>
             <p>Work through these checks to try and solve the problem on your own. Ask for help if you still need it by the end.</p>
-            <% if @next_rbcheck.position > 1 %>
-              <a href="/move-on">Forget it, move on to a different roadblock</a>
-            <% end %>
           <% else %>
             <h2>Completed all checks</h2>
           <% end %>
+              <a href="/move-on">Forget it, move on to a different roadblock</a>
         </div>
         <div class="col-md-4">
             <%= link_to "I Fixed it!", "/roadblocks/#{@current_roadblock.id}/solved-it", class: "btn btn-lg btn-success solved-it"  %>
@@ -43,8 +41,8 @@
     <section class="completed-checks">
       <% @completed_rbchecks.each do |rc| %>
         <div class="completed-check">
+        <h4><%= rc.check.description %></h4>
           <% if rc.completed %>
-            <h4><%= rc.check.description %></h4>
             <% if rc.check.input_label %>
               <% if rc.user_input.present? %>
                 <p class="completed-input"><%= rc.user_input %></p>
@@ -56,6 +54,7 @@
             <span class="completed-check-mark fa fa-check"></span>
           <% else %>
             <%= form_for(rc) do |f| %>
+              <p><%= rc.check.more_info %></p>
               <% if rc.check.input_label.present? %>
                 <div class="form-group">
                   <%= f.label :user_input, rc.check.input_label.to_sym %>
@@ -87,7 +86,7 @@
             <%= f.hidden_field :completed_at, value: DateTime.now %>
             <%= f.hidden_field :completed, value: true %>
             <div class="form-group">
-              <%= f.submit "completed", class: "btn btn-large btn-default" %>
+              <%= f.submit "next step", class: "btn btn-large btn-default" %>
             </div>
         <% end %>
       <% else %>

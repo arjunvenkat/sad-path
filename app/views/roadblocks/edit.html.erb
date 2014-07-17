@@ -10,6 +10,7 @@
         <% if rbc.check.input_label.present? %>
           <div class="form-group">
             <%= f.label :user_input, rbc.check.input_label.to_sym %>
+            <p><%= rbc.check.more_info %></p>
             <%= f.text_area :user_input, placeholder: rbc.check.input_example, rows: 5, class: "form-control" %>
           </div>
           <%= f.hidden_field :completed_at, value: DateTime.now %>
