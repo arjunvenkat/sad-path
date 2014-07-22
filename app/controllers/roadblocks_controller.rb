@@ -6,7 +6,7 @@ class RoadblocksController < ApplicationController
     @roadblock.need_help = true
     @roadblock.save
     session[:roadblock_id] = nil
-    redirect_to :back
+    redirect_to roadblocks_url
   end
 
   def solved_it

@@ -26,7 +26,7 @@
           <% else %>
             <h2>Completed all checks</h2>
           <% end %>
-              <a href="/move-on">Forget it, move on to a different roadblock</a>
+              <a class="impt-link" href="/move-on">Forget it, move on to a different roadblock</a>
         </div>
         <div class="col-md-4">
             <%= link_to "I Fixed it!", "/roadblocks/#{@current_roadblock.id}/solved-it", class: "btn btn-lg btn-success solved-it"  %>

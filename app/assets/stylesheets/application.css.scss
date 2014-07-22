@@ -95,13 +95,19 @@ h1 {
   text-decoration: none;
 }
 
+
 .roadblocks-filter.class-solved .class-solved,
 .roadblocks-filter.class-open .class-open,
 .roadblocks-filter.your-solved .your-solved,
 .roadblocks-filter.your-open .your-open,
-.roadblocks-filter.your-unfinished .your-unfinished, {
+.roadblocks-filter.your-unfinished .your-unfinished,
+.roadblocks-filter.class-all .class-all, {
   border-bottom: 4px solid lightgray;
   padding-bottom: 0.25em;
+}
+
+.impt-link, .impt-link:hover {
+  color: red;
 }
 
 

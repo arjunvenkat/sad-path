@@ -15,9 +15,9 @@ class PagesController < ApplicationController
     if params[:filter] == 'class-solved'
       @roadblocks = current_course.current_topic.roadblocks.where(solved: true)
       @filter = 'class-solved'
-    elsif params[:filter] == 'class-open'
-      @roadblocks = current_course.current_topic.roadblocks.where(need_help: true)
-      @filter = 'class-open'
+    elsif params[:filter] == 'class-all'
+      @roadblocks = current_course.roadblocks
+      @filter = 'class-all'
     elsif params[:filter] == 'your-solved'
       @roadblocks = current_enrollment.roadblocks.where(solved: true)
       @filter = 'your-solved'
@@ -28,7 +28,8 @@ class PagesController < ApplicationController
       @roadblocks = current_enrollment.roadblocks.where(solved: false, need_help: false)
       @filter = 'your-unfinished'
     else
-      @roadblocks = current_course.roadblocks
+      @roadblocks = current_course.current_topic.roadblocks.where(need_help: true)
+      @filter = 'class-open'
     end
   end
 
