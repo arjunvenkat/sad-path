@@ -1,6 +1,7 @@
 class RoadblocksController < ApplicationController
   before_action :check_if_signed_in
   before_action :set_roadblock, only: [:show, :edit, :update, :destroy, :need_help, :solved_it, :add_sol, :not_solved, :update_sol]
+  before_action :check_if_authorized, only: [:edit, :update, :destroy]
 
   def need_help
     @roadblock.need_help = true
@@ -108,6 +109,7 @@ class RoadblocksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_roadblock
       @roadblock = Roadblock.find(params[:id])
     end
@@ -117,6 +119,14 @@ class RoadblocksController < ApplicationController
         redirect_to "/login", notice: "Please sign in first"
       end
       @user = User.find(session[:user_id])
+    end
+
+    def check_if_authorized
+      roadblock = Roadblock.find(params[:id])
+      user = User.find_by_id(session[:user_id])
+      unless roadblock.user1_id == user.id || current_enrollment.instructor == true
+        redirect_to "/roadblocks", notice: "You can only access roadblocks you've created"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
