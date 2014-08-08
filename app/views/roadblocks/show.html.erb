@@ -17,12 +17,13 @@
       </p>
     <% end %>
 
-
-    <h4>Solution</h4>
-    <% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
-      <p><%= rbc.check.description %></p>
+    <% solutions = @roadblock.roadblock_checks.where(solved_it: true) %>
+    <% if solutions.present? %>
+      <h4>Solution</h4>
+      <% solutions.each do |rbc| %>
+        <p><%= rbc.check.description %></p>
+      <% end %>
     <% end %>
-
     <hr>
     <%= form_for(Comment.new) do |f| %>
       <%= f.hidden_field :user_id, value: @user.id %>
