@@ -1,4 +1,6 @@
 SadpathVer2::Application.routes.draw do
+  resources :comments
+
   resources :topics do
     get "/set_current" => "topics#set_current"
   end
