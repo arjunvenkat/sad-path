@@ -4,6 +4,7 @@ class Roadblock < ActiveRecord::Base
   belongs_to :topic
   has_many :roadblock_checks, -> { order("position ASC") }, dependent: :destroy
   has_many :checks, through: :roadblock_checks
+  has_many :comments
 
   def blank?
     blank = true

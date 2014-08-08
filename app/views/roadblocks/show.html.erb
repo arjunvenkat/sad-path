@@ -17,21 +17,36 @@
       </p>
     <% end %>
 
+
     <h4>Solution</h4>
     <% @roadblock.roadblock_checks.where(solved_it: true).each do |rbc| %>
       <p><%= rbc.check.description %></p>
     <% end %>
 
-    <p>
-      <strong>User1:</strong>
-      <%= @roadblock.user1.first %> <%= @roadblock.user1.last %>
-    </p>
-
-    <% if @roadblock.user2 %>
-        <p>
-          <strong>User2:</strong>
-          <%= @roadblock.user2.first %> <%= @roadblock.user2.last %>
-        </p>
+    <hr>
+    <%= form_for(Comment.new) do |f| %>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.hidden_field :roadblock_id, value: @roadblock.id %>
+      <%= f.label :contents, "Add a comment" %><br>
+      <%= f.text_area :contents, class: "form-control" %><br>
+      <%= f.submit "Submit", class: "btn btn-default" %>
+    <% end %>
+    <br>
+    <% @roadblock.comments.each do |comment| %>
+      <div class="panel panel-info">
+        <div class="panel-heading"><%= comment.user.first %> <%= comment.user.last %></div>
+        <div class="panel-body">
+          <div>
+            <%= comment.contents %>
+          </div>
+          <% if comment.user_id == session[:user_id].to_i %>
+            <div>
+              <hr>
+                <%= link_to "delete this comment", comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }  %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
 
 
