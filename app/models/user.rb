@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :courses, through: :enrollments
   has_many :roadblocks, through: :enrollments, source: :roadblocks
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :first, :last, :email, presence: true
 
