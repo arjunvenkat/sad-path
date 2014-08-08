@@ -69,9 +69,13 @@
               <p><%= rbc.check.description %></p>
             <% end %>
           <% end %>
-          <% if rb.enrollment == current_enrollment || current_enrollment.instructor %>
-            <div><a href="/roadblocks/<%= rb.id %>/edit">Edit</a></div>
-          <% end %>
+          <hr>
+          <div>
+            <%= link_to "Add a comment", rb, class: "btn btn-primary"  %>
+            <% if rb.enrollment == current_enrollment || current_enrollment.instructor %> or
+              <a href="/roadblocks/<%= rb.id %>/edit">Edit</a>
+            <% end %>
+          </div>
         </div>
     </div>
     <% end %>
