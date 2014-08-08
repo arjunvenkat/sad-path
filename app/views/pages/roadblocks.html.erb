@@ -38,12 +38,15 @@
       <% end %>
       <div id="roadblock-<%= rb.id %>" class="panel <%= solved_class %>">
         <div class="panel-heading">
-          <h3 class="panel-title">#<%= rb.id %>
-            - <%= rb.user1.first %> <%= rb.user1.last %>
-            <% if rb.user2 %>
-              & <%= rb.user2.first %> <%= rb.user2.last %>
-            <% end %>
-            - <%= rb.updated_at.strftime(" %B %d, %Y") %>
+          <h3 class="panel-title">
+            <a href="/roadblocks/<%= rb.id %>">
+              #<%= rb.id %>
+              - <%= rb.user1.first %> <%= rb.user1.last %>
+              <% if rb.user2 %>
+                & <%= rb.user2.first %> <%= rb.user2.last %>
+              <% end %>
+              - <%= rb.updated_at.strftime(" %B %d, %Y") %>
+            </a>
           </h3>
         </div>
         <div class="panel-body">
