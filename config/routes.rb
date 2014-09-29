@@ -29,7 +29,7 @@ SadpathVer2::Application.routes.draw do
   get "/login" => "sessions#new"
   post "sessions/create" => "sessions#create"
   delete "logout" => "sessions#destroy"
-  root 'pages#stuck'
+  root 'pages#home'
   get 'stuck' => 'pages#stuck'
   get '/move-on' => 'pages#move_on'
   get '/roadblocks-dash' => 'pages#roadblocks'
