@@ -24,8 +24,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/stuck">Get unstuck</a></li>
-        <li><a href="/roadblocks-dash">Roadblocks</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -47,7 +45,6 @@
             <li><%= link_to "logout", "/logout", method: :delete %></li>
           <% else %>
             <li><%= link_to u.email, edit_user_path(u)  %></li>
-            <li><a href="/login">Sign in a partner</a></li>
             <li><%= link_to "logout", "/logout", method: :delete %></li>
           <% end %>
         <% else %>
