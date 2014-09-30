@@ -59,6 +59,14 @@ class RoadblocksController < ApplicationController
     @roadblock = Roadblock.new
   end
 
+  def new_conceptual
+    @roadblock = Roadblock.new
+  end
+
+  def new_bug
+    @roadblock = Roadblock.new
+  end
+
   # GET /roadblocks/1/edit
   def edit
   end
@@ -68,10 +76,8 @@ class RoadblocksController < ApplicationController
   def create
     @roadblock = Roadblock.new(roadblock_params)
     @roadblock.user1_id = @user.id
-    @roadblock.course_id = @user.course_id
-    if session[:user2_id]
-      @roadblock.user2_id = session[:user2_id].to_i
-    end
+    @roadblock.course_id = current_course.id
+    @roadblock.enrollment_id = current_enrollment.id
     respond_to do |format|
       if @roadblock.save
         format.html { redirect_to '/' }

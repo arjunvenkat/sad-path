@@ -24,6 +24,8 @@ SadpathVer2::Application.routes.draw do
   get '/roadblocks/:id/not-solved' => 'roadblocks#not_solved'
   post 'roadblocks/:id/add-sol' => 'roadblocks#add_sol'
   post '/roadblocks/:id/update-sol' => 'roadblocks#update_sol'
+  get '/roadblocks/new/conceptual' => 'roadblocks#new_conceptual'
+  get '/roadblocks/new/bug' => 'roadblocks#new_bug'
   resources :users
 
   get "/login" => "sessions#new"

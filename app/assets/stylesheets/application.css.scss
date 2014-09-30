@@ -96,12 +96,10 @@ h1 {
 }
 
 
-.roadblocks-filter.class-solved .class-solved,
-.roadblocks-filter.class-open .class-open,
-.roadblocks-filter.your-solved .your-solved,
-.roadblocks-filter.your-open .your-open,
-.roadblocks-filter.your-unfinished .your-unfinished,
-.roadblocks-filter.class-all .class-all, {
+.roadblocks-filter.question-you .question-you,
+.roadblocks-filter.question-class .question-class,
+.roadblocks-filter.bug-you .bug-you,
+.roadblocks-filter.bug-class .bug-class {
   border-bottom: 4px solid lightgray;
   padding-bottom: 0.25em;
 }

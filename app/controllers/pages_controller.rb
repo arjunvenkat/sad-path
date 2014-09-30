@@ -6,31 +6,32 @@ class PagesController < ApplicationController
       current_course = Course.find(session[:course_id])
       @user = User.find(session[:user_id])
       # @recent_roadblocks = current_course.roadblocks.order(created_at: :desc).limit(10)
-
     else
       redirect_to "/login"
     end
   end
 
   def roadblocks
-    if params[:filter] == 'class-solved'
-      @roadblocks = current_course.current_topic.roadblocks.where(solved: true)
-      @filter = 'class-solved'
-    elsif params[:filter] == 'class-all'
-      @roadblocks = current_course.roadblocks
-      @filter = 'class-all'
-    elsif params[:filter] == 'your-solved'
-      @roadblocks = current_enrollment.roadblocks.where(solved: true)
-      @filter = 'your-solved'
-    elsif params[:filter] == 'your-open'
-      @roadblocks = current_enrollment.roadblocks.where(need_help: true)
-      @filter = 'your-open'
-    elsif params[:filter] == 'your-unfinished'
-      @roadblocks = current_enrollment.roadblocks.where(solved: false, need_help: false)
-      @filter = 'your-unfinished'
+    if params[:question_filter] == 'question-you'
+      @questions = current_enrollment.roadblocks.where("code_snippet IS NULL AND error_message IS NULL")
+      @question_filter = 'question-you'
+    elsif params[:question_filter] == 'question-class'
+      @questions = current_course.roadblocks.where("code_snippet IS NULL AND error_message IS NULL")
+      @question_filter = 'question-class'
     else
-      @roadblocks = current_course.current_topic.roadblocks.where(need_help: true)
-      @filter = 'class-open'
+      @questions = current_enrollment.roadblocks.where("code_snippet IS NULL AND error_message IS NULL")
+      @question_filter = 'question-you'
+    end
+
+    if params[:bug_filter] === 'bug-you'
+      @bugs = current_enrollment.roadblocks.where("error_message IS NOT NUll OR code_snippet IS NOT NULL")
+      @bug_filter = 'bug-you'
+    elsif params[:bug_filter] == 'bug-class'
+      @bugs = current_course.roadblocks.where("error_message IS NOT NUll OR code_snippet IS NOT NULL")
+      @bug_filter = 'bug-class'
+    else
+      @bugs = current_enrollment.roadblocks.where("error_message IS NOT NUll OR code_snippet IS NOT NULL")
+      @bug_filter = 'bug-you'
     end
   end
 

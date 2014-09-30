@@ -1,0 +1,26 @@
+<h1>Enter the details of your bug</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@roadblock) do |f| %>
+      <div class="form-group">
+        <%= f.label :error_message %><br>
+        <%= f.text_field :error_message, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :code_snippet %><br>
+        <%= f.text_area :code_snippet, class: "form-control", rows: 5 %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, class: "form-control", rows: 3 %>
+      </div>
+      <div class="form-group">
+        <%= f.label :solution %><br>
+        <%= f.text_area :solution, class: "form-control", rows: 3 %>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
